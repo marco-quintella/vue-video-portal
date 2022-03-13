@@ -223,11 +223,11 @@ export default {
       const uploadUrlResponse = await VideoService.getUploadUrl()
       const uploadUrl = uploadUrlResponse.data.data.url
 
-      const apiKey = `${process.env.UP_KEY}`
+      const apiKey = `${process.env.UPSTREAM_KEY}`
       console.log(apiKey)
 
       const uploadForm = new FormData()
-      uploadForm.append("api_key", "83de3cdjtxura1ugmio")
+      uploadForm.append("key", apiKey)
       uploadForm.append("file", this.selectedFile, this.selectedFile.name)
 
       let video = await VideoService.uploadVideo(uploadUrl, uploadForm, {
