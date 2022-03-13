@@ -227,7 +227,7 @@ export default {
       console.log(apiKey)
 
       const uploadForm = new FormData()
-      uploadForm.append("key", apiKey)
+      uploadForm.append("key", "35214r37fprr4277s5xwm")
       uploadForm.append("file", this.selectedFile, this.selectedFile.name)
 
       let video = await VideoService.uploadVideo(uploadUrl, uploadForm, {
