@@ -23,7 +23,10 @@ export default {
       method: 'POST',
       baseURL: url,
       url: '',
-      data
+      data,
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
   },
   updateVideo(id, data) {
