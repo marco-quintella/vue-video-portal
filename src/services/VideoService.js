@@ -19,7 +19,7 @@ export default {
   // },
   uploadVideo(url, data) {
     console.log(url)
-    return Axios({
+    return Axios.request({
       method: 'POST',
       baseURL: url,
       url: '',
