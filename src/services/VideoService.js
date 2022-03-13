@@ -1,6 +1,5 @@
 
 import Api from '@/services/Api'
-import Axios from 'axios'
 
 export default {
   getAll(data, params) {
@@ -19,7 +18,7 @@ export default {
   // },
   uploadVideo(url, data) {
     console.log(url)
-    return Axios.request({
+    return Api().request({
       method: 'POST',
       baseURL: url,
       url: '',
