@@ -1,5 +1,6 @@
 
 import Api from '@/services/Api'
+import Axios from 'axios'
 
 export default {
   getAll(data, params) {
@@ -18,11 +19,14 @@ export default {
   // },
   uploadVideo(url, data) {
     console.log(url)
-    return Api().request({
+    return Axios.request({
       method: 'POST',
       baseURL: url,
       url: '',
-      data
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
   },
   updateVideo(id, data) {
