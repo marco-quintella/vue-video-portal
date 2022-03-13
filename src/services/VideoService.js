@@ -21,12 +21,9 @@ export default {
     console.log(url)
     return Axios.request({
       method: 'POST',
-      baseURL: url,
+      baseURL: 'https://upbeat-almeida-b52076.netlify.app/.netlify/functions/upload-video',
       url: '',
-      data,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+      data
     })
   },
   updateVideo(id, data) {

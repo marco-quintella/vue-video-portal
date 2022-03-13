@@ -2,6 +2,9 @@ const fetch = require('node-fetch')
 
 const handler = async function (req) {
   try {
+
+    console.log(req)
+
     const params = new URLSearchParams()
     params.append('key', '35214r37fprr4277s5xwm')
     params.append('file', req.file)

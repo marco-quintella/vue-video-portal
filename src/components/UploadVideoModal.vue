@@ -227,10 +227,11 @@ export default {
       // console.log(apiKey)
 
       const uploadForm = new FormData()
+      uploadForm.append("url", uploadUrl)
       uploadForm.append("key", "35214r37fprr4277s5xwm")
       uploadForm.append("file", this.selectedFile, this.selectedFile.name)
 
-      let video = await VideoService.uploadVideo(uploadUrl, uploadForm, {
+      let video = await VideoService.uploadVideo(uploadForm, {
         onUploadProgress: (uploadEvent) => {
           this.value = Math.round(
             (uploadEvent.loaded / uploadEvent.total) * 100
