@@ -1,6 +1,4 @@
-[[redirects]]
-  from = "/studio"
-  to = "https://s103.upstreamcdn.co/*"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
+[build]
+  command = "yarn run build"
+  functions = "functions"
+  publish = "dist"
