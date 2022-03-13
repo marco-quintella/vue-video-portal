@@ -211,9 +211,9 @@
 </template>
 
 <script>
-import myUpload from "vue-image-crop-upload";
-import VideoService from "@/services/VideoService";
-import CategoryService from "@/services/CategoryService";
+import CategoryService from "@/services/CategoryService"
+import VideoService from "@/services/VideoService"
+import myUpload from "vue-image-crop-upload"
 export default {
   name: "UploadModal",
   props: ["openDialog"],
@@ -265,6 +265,7 @@ export default {
       this.uploading = true;
       const fd = new FormData();
       fd.append("video", this.selectedFile, this.selectedFile.name);
+      console.log('fd', fd.get('video'))
 
       let video = await VideoService.uploadVideo(fd, {
         onUploadProgress: (uploadEvent) => {
