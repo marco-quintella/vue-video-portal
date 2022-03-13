@@ -1,4 +1,6 @@
+
 import Api from '@/services/Api'
+import Axios from 'axios'
 
 export default {
   getAll(data, params) {
@@ -9,8 +11,23 @@ export default {
   getById(id) {
     return Api().get(`videos/${id}`)
   },
-  uploadVideo(data, optional) {
-    return Api().post('videos', data, optional)
+  getUploadUrl() {
+    return Api().get('videos/url')
+  },
+  // uploadVideo(data, optional) {
+  //   return Api().post('videos', data, optional)
+  // },
+  uploadVideo(url, data) {
+    console.log(url)
+    return Axios({
+      method: 'POST',
+      baseURL: url,
+      url: '',
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+    })
   },
   updateVideo(id, data) {
     return Api().put(`videos/${id}`, data)

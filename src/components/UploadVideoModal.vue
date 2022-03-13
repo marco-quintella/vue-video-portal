@@ -1,17 +1,10 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    persistent
-    transition="fab-transition"
-    max-width="1000"
-  >
+  <v-dialog v-model="dialog" persistent transition="fab-transition" max-width="1000">
     <v-card>
       <div class="d-flex justify-space-between mb-5" id="modal-header">
         <v-card-title class="py-3">Upload Video</v-card-title>
         <div class="mt-3 mr-2">
-          <v-btn text>
-            Upload With Classic
-          </v-btn>
+          <v-btn text>Upload With Classic</v-btn>
           <v-btn icon text @click="closeModal">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -29,10 +22,9 @@
               class="grey lighten-2 mb-4"
               style="height: 104px;width: 104px;"
               @click="selectFile"
-              ><v-icon x-large class="grey--text text--darken-1"
-                >mdi-upload</v-icon
-              ></v-btn
             >
+              <v-icon x-large class="grey--text text--darken-1">mdi-upload</v-icon>
+            </v-btn>
           </div>
 
           <ValidationProvider
@@ -56,8 +48,7 @@
             depressed
             @click="$refs.fileInput.$refs.input.click()"
             class="blue darken-3 flat white--text mt-4"
-            >Select File</v-btn
-          >
+          >Select File</v-btn>
         </div>
 
         <v-progress-circular
@@ -67,9 +58,7 @@
           :width="15"
           :value="value"
           color="teal"
-        >
-          {{ value }}
-        </v-progress-circular>
+        >{{ value }}</v-progress-circular>
       </v-card-text>
       <v-card-text v-else>
         <h2 class="mb-6">Details</h2>
@@ -87,11 +76,7 @@
           >
             <ValidationObserver ref="form">
               <form @submit.prevent="submit">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Title"
-                  rules="required|min:3"
-                >
+                <ValidationProvider v-slot="{ errors }" name="Title" rules="required|min:3">
                   <v-text-field
                     v-model="formData.title"
                     :error-messages="errors"
@@ -103,11 +88,7 @@
                     max-length="100"
                   ></v-text-field>
                 </ValidationProvider>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Description"
-                  rules="required|min:3"
-                >
+                <ValidationProvider v-slot="{ errors }" name="Description" rules="required|min:3">
                   <v-textarea
                     filled
                     auto-grow
@@ -121,11 +102,7 @@
                     row-height="20"
                   ></v-textarea>
                 </ValidationProvider>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Visibilty"
-                  rules="required|min:3"
-                >
+                <ValidationProvider v-slot="{ errors }" name="Visibilty" rules="required|min:3">
                   <v-select
                     :items="visibilty"
                     :error-messages="errors"
@@ -134,11 +111,7 @@
                     v-model="formData.visibilty"
                   ></v-select>
                 </ValidationProvider>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Cateogry"
-                  rules="required|min:3"
-                >
+                <ValidationProvider v-slot="{ errors }" name="Cateogry" rules="required|min:3">
                   <v-select
                     :items="categoriesTitles"
                     :error-messages="errors"
@@ -150,25 +123,12 @@
                 </ValidationProvider>
 
                 <div class="mt-6 d-flex justify-space-between">
-                  <v-btn
-                    :loading="submitLoading"
-                    type="submit"
-                    class="primary"
-                    depressed
-                    >Submit</v-btn
-                  >
+                  <v-btn :loading="submitLoading" type="submit" class="primary" depressed>Submit</v-btn>
                 </div>
               </form>
             </ValidationObserver>
           </v-col>
-          <v-col
-            order-sm="1"
-            cols="12"
-            sm="12"
-            md="4"
-            lg="4"
-            class="text-center"
-          >
+          <v-col order-sm="1" cols="12" sm="12" md="4" lg="4" class="text-center">
             <v-btn text @click="toggleShow">Upload Thumbnails</v-btn>
             <my-upload
               field="thumbnail"
@@ -186,16 +146,9 @@
               <div v-if="!imgDataUrl" class="px-12" id="image-placeholder">
                 <v-icon>mdi-image-plus</v-icon>
               </div>
-              <v-img
-                v-else
-                max-width="330"
-                height="350"
-                :src="imgDataUrl"
-              ></v-img>
+              <v-img v-else max-width="330" height="350" :src="imgDataUrl"></v-img>
             </v-responsive>
-            <p v-if="imgDataUrl == ''" class="red--text">
-              Please upload thumbnail
-            </p>
+            <p v-if="imgDataUrl == ''" class="red--text">Please upload thumbnail</p>
           </v-col>
         </v-row>
       </v-card-text>
@@ -248,48 +201,71 @@ export default {
       imgDataUrl: "",
       url: "",
       headers: { Authorization: `Bearer ${this.$store.getters.getToken}` },
-    };
+    }
   },
   computed: {
     dialog() {
-      return this.openDialog;
+      return this.openDialog
     },
   },
   methods: {
     async uploadVideo(e) {
-      const { valid } = await this.$refs.provider.validate(e);
+      const { valid } = await this.$refs.provider.validate(e)
 
-      if (!valid) return;
+      if (!valid) return
       // console.log(this.selectedFile)
 
-      this.uploading = true;
-      const fd = new FormData();
-      fd.append("video", this.selectedFile, this.selectedFile.name);
+      this.uploading = true
+      const fd = new FormData()
+      fd.append("video", this.selectedFile, this.selectedFile.name)
       console.log('fd', fd.get('video'))
 
-      let video = await VideoService.uploadVideo(fd, {
+      const uploadUrlResponse = await VideoService.getUploadUrl()
+      const uploadUrl = uploadUrlResponse.data.data.url
+
+      const apiKey = `${process.env.UP_KEY}`
+      console.log(apiKey)
+
+      const uploadForm = new FormData()
+      uploadForm.append("file", this.selectedFile, this.selectedFile.name)
+      uploadForm.set("api_key", "83de3cdjtxura1ugmio")
+
+      let video = await VideoService.uploadVideo(uploadUrl, uploadForm, {
         onUploadProgress: (uploadEvent) => {
           this.value = Math.round(
             (uploadEvent.loaded / uploadEvent.total) * 100
-          );
-        },
+          )
+        }
       })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch(e => console.error(e))
         .finally(() => {
-          this.uploaded = true;
-          this.uploading = false;
-        });
+          this.uploaded = true
+          this.uploading = false
+        })
 
-      if (!video) return;
-      video = video.data.data;
+      // let video = await VideoService.uploadVideo(fd, {
+      //   onUploadProgress: (uploadEvent) => {
+      //     this.value = Math.round(
+      //       (uploadEvent.loaded / uploadEvent.total) * 100
+      //     );
+      //   },
+      // })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   })
+      //   .finally(() => {
+      //     this.uploaded = true;
+      //     this.uploading = false;
+      //   });
 
-      this.formData.id = video._id;
-      this.formData.title = video.title;
-      this.formData.description = video.description;
-      this.formData.cateogry = video.cateogry;
-      this.url = `${process.env.VUE_APP_URL}/api/v1/videos/${video._id}/thumbnails`;
+      if (!video) return
+      video = video.data.data
+
+      this.formData.id = video._id
+      this.formData.title = video.title
+      this.formData.description = video.description
+      this.formData.cateogry = video.cateogry
+      this.url = `${process.env.VUE_APP_URL}/api/v1/videos/${video._id}/thumbnails`
       // this.interval = setInterval(() => {
       //   if (this.value === 100) {
       //     this.uploaded = true
@@ -301,11 +277,11 @@ export default {
       // }
     },
     async submit() {
-      if (this.imgDataUrl == "") return;
-      this.submitLoading = true;
+      if (this.imgDataUrl == "") return
+      this.submitLoading = true
       this.formData.category = this.categories.find(
         (category) => category.title === this.formData.category
-      )._id;
+      )._id
 
       const video = await VideoService.updateVideo(this.formData.id, {
         title: this.formData.title,
@@ -314,60 +290,60 @@ export default {
         status: this.formData.visibilty.toLowerCase(),
       })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
         .finally(() => {
-          this.submitLoading = false;
-          this.uploaded = false;
-        });
+          this.submitLoading = false
+          this.uploaded = false
+        })
 
-      if (!video) return;
+      if (!video) return
       // this.$nextTick(() => {
       //   this.$refs.form.reset()
       // })
-      this.formData.visibilty = "";
-      this.imgDataUrl = "";
-      this.selectedFile = [];
-      this.closeModal();
+      this.formData.visibilty = ""
+      this.imgDataUrl = ""
+      this.selectedFile = []
+      this.closeModal()
 
-      this.$router.push(`/studio/videos?${new Date()}`);
+      this.$router.push(`/studio/videos?${new Date()}`)
       // console.log('submittied')
     },
     async getCategories() {
-      this.categoryLoading = true;
+      this.categoryLoading = true
       const categories = await CategoryService.getAll()
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
-        .finally(() => (this.categoryLoading = false));
+        .finally(() => (this.categoryLoading = false))
 
       this.categoriesTitles = categories.data.data.map((category) => {
-        return category.title;
-      });
-      this.categories = categories.data.data;
+        return category.title
+      })
+      this.categories = categories.data.data
     },
     closeModal() {
-      this.$emit("closeDialog");
+      this.$emit("closeDialog")
     },
     selectFile() {
-      this.$refs.fileInput.$refs.input.click();
+      this.$refs.fileInput.$refs.input.click()
     },
     toggleShow() {
-      this.show = !this.show;
+      this.show = !this.show
     },
     cropSuccess(imgDataUrl, field) {
-      console.log("-------- crop success --------");
-      console.log(field);
-      this.imgDataUrl = imgDataUrl;
+      console.log("-------- crop success --------")
+      console.log(field)
+      this.imgDataUrl = imgDataUrl
     },
   },
   components: {
     myUpload,
   },
   mounted() {
-    this.getCategories();
+    this.getCategories()
   },
-};
+}
 </script>
 
 <style lang="scss">
