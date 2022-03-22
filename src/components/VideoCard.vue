@@ -5,12 +5,23 @@
     flat
     tile
     router
-    :to="`/watch/${video._id}`"
+    :to="video.status != 'processing' ? `/watch/${video._id}` : ''"
   >
     <v-img
-      :src="`${url}/uploads/thumbnails/${video.thumbnailUrl}`"
-
-    ></v-img>
+      :src="video.status != 'processing' ? `${url}/uploads/thumbnails/${video.thumbnailUrl}` : `${url}/uploads/thumbnails/loading.webp`"
+    >
+        <v-row
+          class="fill-height ma-0"
+          align="center"
+          justify="center"
+          style="background-color: rgba(0, 0, 0, 0.5);"
+        >
+          <v-progress-circular
+            indeterminate
+            color="grey lighten-5"
+          ></v-progress-circular>
+        </v-row>
+    </v-img>
     <v-row no-gutters>
       <v-col cols="2" v-if="card.type != 'noAvatar'">
         <v-list-item class="pl-0 pt-3" router :to="`/channels/${channel._id}`">
@@ -49,7 +60,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from "moment"
 export default {
   name: "VideoCard",
   props: {

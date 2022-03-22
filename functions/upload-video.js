@@ -1,15 +1,13 @@
 const fetch = require('node-fetch')
 
 const handler = async function (req) {
+  console.log('req', req)
   try {
-
-    console.log(req)
-
     const params = new URLSearchParams()
     params.append('key', '35214r37fprr4277s5xwm')
-    params.append('file', req.file)
+    params.append('file', req.body.file)
 
-    const response = await fetch(req.url, {
+    const response = await fetch(req.body.url, {
       method: 'POST',
       headers: { Accept: 'application/json' },
       body: params

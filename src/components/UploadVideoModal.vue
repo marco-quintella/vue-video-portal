@@ -220,44 +220,48 @@ export default {
       fd.append("video", this.selectedFile, this.selectedFile.name)
       console.log('fd', fd.get('video'))
 
-      const uploadUrlResponse = await VideoService.getUploadUrl()
-      const uploadUrl = uploadUrlResponse.data.data.url
+      // const uploadUrlResponse = await VideoService.getUploadUrl()
+      // const uploadUrl = uploadUrlResponse.data.data.url
 
       // const apiKey = `${process.env.UPSTREAM_KEY}`
       // console.log(apiKey)
 
-      const uploadForm = new FormData()
-      uploadForm.append("url", uploadUrl)
-      uploadForm.append("key", "35214r37fprr4277s5xwm")
-      uploadForm.append("file", this.selectedFile, this.selectedFile.name)
+      // const uploadForm = {
+      //   url: uploadUrl,
+      //   key: "35214r37fprr4277s5xwm",
+      //   file: new Blob()
+      // }
+      // uploadForm.append("url", uploadUrl)
+      // uploadForm.append("key", "35214r37fprr4277s5xwm")
+      // uploadForm.append("file", this.selectedFile, this.selectedFile.name)
 
-      let video = await VideoService.uploadVideo(uploadForm, {
+      // let video = await VideoService.uploadVideo(uploadForm, {
+      //   onUploadProgress: (uploadEvent) => {
+      //     this.value = Math.round(
+      //       (uploadEvent.loaded / uploadEvent.total) * 100
+      //     )
+      //   }
+      // })
+      //   .catch(e => console.error(e))
+      //   .finally(() => {
+      //     this.uploaded = true
+      //     this.uploading = false
+      //   })
+
+      let video = await VideoService.uploadVideo(fd, {
         onUploadProgress: (uploadEvent) => {
           this.value = Math.round(
             (uploadEvent.loaded / uploadEvent.total) * 100
           )
-        }
+        },
       })
-        .catch(e => console.error(e))
+        .catch((err) => {
+          console.log(err)
+        })
         .finally(() => {
           this.uploaded = true
           this.uploading = false
         })
-
-      // let video = await VideoService.uploadVideo(fd, {
-      //   onUploadProgress: (uploadEvent) => {
-      //     this.value = Math.round(
-      //       (uploadEvent.loaded / uploadEvent.total) * 100
-      //     );
-      //   },
-      // })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   })
-      //   .finally(() => {
-      //     this.uploaded = true;
-      //     this.uploading = false;
-      //   });
 
       if (!video) return
       video = video.data.data
@@ -267,15 +271,15 @@ export default {
       this.formData.description = video.description
       this.formData.cateogry = video.cateogry
       this.url = `${process.env.VUE_APP_URL}/api/v1/videos/${video._id}/thumbnails`
-      // this.interval = setInterval(() => {
-      //   if (this.value === 100) {
-      //     this.uploaded = true
-      //     clearInterval(this.inte-rval)
-      //   }
-      //   this.value += 10
-      // }, 1000)
-      // }
-      // }
+      this.interval = setInterval(() => {
+        if (this.value === 100) {
+          this.uploaded = true
+          clearInterval(this.interval)
+        }
+        this.value += 10
+      }, 1000)
+
+
     },
     async submit() {
       if (this.imgDataUrl == "") return

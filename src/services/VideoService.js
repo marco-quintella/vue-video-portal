@@ -1,6 +1,5 @@
 
 import Api from '@/services/Api'
-import Axios from 'axios'
 
 export default {
   getAll(data, params) {
@@ -14,18 +13,16 @@ export default {
   getUploadUrl() {
     return Api().get('videos/url')
   },
-  // uploadVideo(data, optional) {
-  //   return Api().post('videos', data, optional)
-  // },
-  uploadVideo(url, data) {
-    console.log(url)
-    return Axios.request({
-      method: 'POST',
-      baseURL: 'https://upbeat-almeida-b52076.netlify.app/.netlify/functions/upload-video',
-      url: '',
-      data
-    })
+  uploadVideo(data, optional) {
+    return Api().post('videos', data, optional)
   },
+  // uploadVideo(data) {
+  //   console.log('data', data)
+  //   return Api().post('', data, {
+  //     baseURL: 'http://localhost:8888/.netlify/functions/upload-video',
+  //     // baseURL: 'https://upbeat-almeida-b52076.netlify.app/.netlify/functions/upload-video'
+  //   })
+  // },
   updateVideo(id, data) {
     return Api().put(`videos/${id}`, data)
   },

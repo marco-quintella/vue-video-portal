@@ -119,7 +119,7 @@
             </v-tab-item>
             <v-tab-item>
               <v-card class="transparent" flat>
-                <v-card-title>Uploads</v-card-title>
+                <v-card-title>Uploads 2</v-card-title>
                 <v-row>
                   <v-col
                     cols="12"
@@ -154,14 +154,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
+import SigninModal from '@/components/SigninModal'
+import VideoCard from '@/components/VideoCard'
+import SubscriptionService from '@/services/SubscriptionService'
 import UserService from '@/services/UserService'
 import VideoService from '@/services/VideoService'
-import SubscriptionService from '@/services/SubscriptionService'
+import { mapGetters } from 'vuex'
 
-import VideoCard from '@/components/VideoCard'
-import SigninModal from '@/components/SigninModal'
+
 
 export default {
   data: () => ({
@@ -216,7 +216,7 @@ export default {
       // this.getChannel()
       this.loading = true
 
-      const videos = await VideoService.getAll('public', {
+      const videos = await VideoService.getAll('uploads', {
         userId: this.channel._id
       })
         .catch((err) => {
