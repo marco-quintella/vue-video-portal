@@ -71,8 +71,8 @@
             order-xl="first"
             cols="12"
             sm="12"
-            md="8"
-            lg="8"
+            md="12"
+            lg="12"
           >
             <ValidationObserver ref="form">
               <form @submit.prevent="submit">
@@ -128,7 +128,7 @@
               </form>
             </ValidationObserver>
           </v-col>
-          <v-col order-sm="1" cols="12" sm="12" md="4" lg="4" class="text-center">
+          <!-- <v-col order-sm="1" cols="12" sm="12" md="4" lg="4" class="text-center">
             <v-btn text @click="toggleShow">Upload Thumbnails</v-btn>
             <my-upload
               field="thumbnail"
@@ -149,7 +149,7 @@
               <v-img v-else max-width="330" height="350" :src="imgDataUrl"></v-img>
             </v-responsive>
             <p v-if="imgDataUrl == ''" class="red--text">Please upload thumbnail</p>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-card-text>
       <v-card-actions v-if="!uploaded">
@@ -166,7 +166,7 @@
 <script>
 import CategoryService from "@/services/CategoryService"
 import VideoService from "@/services/VideoService"
-import myUpload from "vue-image-crop-upload"
+// import myUpload from "vue-image-crop-upload"
 export default {
   name: "UploadModal",
   props: ["openDialog"],
@@ -342,9 +342,9 @@ export default {
       this.imgDataUrl = imgDataUrl
     },
   },
-  components: {
-    myUpload,
-  },
+  // components: {
+  //   myUpload,
+  // },
   mounted() {
     this.getCategories()
   },
