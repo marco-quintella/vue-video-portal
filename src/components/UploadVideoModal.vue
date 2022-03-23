@@ -292,7 +292,7 @@ export default {
         title: this.formData.title,
         description: this.formData.description,
         categoryId: this.formData.category,
-        status: this.formData.visibilty.toLowerCase(),
+        desiredStatus: this.formData.visibilty.toLowerCase(),
       })
         .catch((err) => {
           console.log(err)

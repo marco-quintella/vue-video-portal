@@ -12,6 +12,7 @@
     "core-js": "^3.6.4",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.7",
+    "url-exist": "^3.0.0",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-image-crop-upload": "^2.5.0",

@@ -8,9 +8,10 @@
     :to="video.status != 'processing' ? `/watch/${video._id}` : ''"
   >
     <v-img
-      :src="video.status != 'processing' ? `${url}/uploads/thumbnails/${video.thumbnailUrl}` : `${url}/uploads/thumbnails/loading.webp`"
+      :src="video.status !== 'processing' ? urlExist(video.thumbnailUrl) ? video.thumbnailUrl : `${url}/uploads/thumbnails/no-image.jpg` : `${url}/uploads/thumbnails/loading.webp`"
     >
         <v-row
+          v-if="video.status === 'processing'"
           class="fill-height ma-0"
           align="center"
           justify="center"
@@ -61,6 +62,8 @@
 
 <script>
 import moment from "moment"
+import { default as _urlExist } from 'url-exist'
+
 export default {
   name: "VideoCard",
   props: {
@@ -83,6 +86,9 @@ export default {
     dateFormatter(date) {
       return moment(date).fromNow();
     },
+    urlExist(url) {
+      return _urlExist(url)
+    }
   },
 };
 </script>
