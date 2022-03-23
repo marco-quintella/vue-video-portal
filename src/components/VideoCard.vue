@@ -5,13 +5,13 @@
     flat
     tile
     router
-    :to="video.status != 'processing' ? `/watch/${video._id}` : ''"
+    :to="(video.status != 'processing' || video.status != 'uploading') ? `/watch/${video._id}` : ''"
   >
     <v-img
-      :src="video.status !== 'processing' ? urlExist(video.thumbnailUrl) ? video.thumbnailUrl : `${url}/uploads/thumbnails/no-image.jpg` : `${url}/uploads/thumbnails/loading.webp`"
+      :src="(video.status != 'processing' || video.status != 'uploading') ? urlExist(video.thumbnailUrl) ? video.thumbnailUrl : `${url}/uploads/thumbnails/no-image.jpg` : `${url}/uploads/thumbnails/loading.webp`"
     >
         <v-row
-          v-if="video.status === 'processing'"
+          v-if="video.status === 'processing' || video.status === 'uploading'"
           class="fill-height ma-0"
           align="center"
           justify="center"
