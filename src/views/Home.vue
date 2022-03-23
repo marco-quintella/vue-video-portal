@@ -16,7 +16,7 @@
       </v-alert>
 
       <main v-else>
-        <h3 class="headline font-weight-medium">Recommended</h3>
+        <!-- <h3 class="headline font-weight-medium">Recommended</h3> -->
         <v-row>
           <v-col
             cols="12"
@@ -73,11 +73,11 @@
 </template>
 
 <script>
-import InfiniteLoading from 'vue-infinite-loading'
-import moment from 'moment'
-
 import VideoCard from '@/components/VideoCard'
 import VideoService from '@/services/VideoService'
+import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
+
 
 export default {
   name: 'Home',

@@ -27,10 +27,30 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  font-size: 14px;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+h3, .h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
 .content-bg {
   background-color: #f9f9f9;
 }
 .card {
   background: #f9f9f9 !important;
+}
+.text-primary {
+  color: #030303 !important;
 }
 </style>
