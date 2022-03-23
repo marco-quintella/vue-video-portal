@@ -1,16 +1,14 @@
+import {
+  extend, setInteractionMode, ValidationObserver,
+  ValidationProvider
+} from 'vee-validate'
+import { email, max, min, oneOf, required, size } from 'vee-validate/dist/rules'
 import Vue from 'vue'
+import Vuebar from 'vuebar'
 import App from './App.vue'
+import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
-import vuetify from './plugins/vuetify'
-import { required, email, max, min, size, oneOf } from 'vee-validate/dist/rules'
-import {
-  extend,
-  ValidationObserver,
-  ValidationProvider,
-  setInteractionMode
-} from 'vee-validate'
-import Vuebar from 'vuebar'
 // import InfiniteLoading from 'vue-infinite-loading'
 
 setInteractionMode('eager')
@@ -49,7 +47,7 @@ extend('password', {
 
 extend('size', {
   ...size,
-  message: 'video size should be less than 5 MB!'
+  message: 'video size should be less than 5 GB!'
 })
 
 Vue.config.productionTip = false

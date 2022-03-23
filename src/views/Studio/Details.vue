@@ -115,9 +115,9 @@
 </template>
 
 <script>
-import myUpload from 'vue-image-crop-upload'
-import VideoService from '@/services/VideoService'
 import CategoryService from '@/services/CategoryService'
+import VideoService from '@/services/VideoService'
+import myUpload from 'vue-image-crop-upload'
 
 export default {
   name: 'Details',
@@ -132,8 +132,8 @@ export default {
       rules: [
         (value) =>
           !value ||
-          value.size < 5000000 ||
-          'Video size should be less than 5 MB!'
+          value.size < 5000000000 ||
+          'Video size should be less than 5 GB!'
       ],
       categoriesTitles: [],
       categories: [],
