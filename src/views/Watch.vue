@@ -27,16 +27,7 @@
               >
                 <div ref="hello">
                   <v-responsive max-height="450">
-                    <video
-                      ref="videoPlayer"
-                      controls
-                      style="height: 100%; width: 100%"
-                    >
-                      <source
-                        :src="`${url}/uploads/videos/${video.url}`"
-                        type="video/mp4"
-                      />
-                    </video>
+                    <iframe :src="`https://upvideo.to/e/${video.fileCode}`" scrolling="no" frameborder="0" width="100%" height="100%" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
                   </v-responsive>
 
                   <v-card flat tile class="card">
@@ -335,18 +326,18 @@
 </template>
 
 <script>
-import moment from 'moment'
-import { mapGetters } from 'vuex'
-import InfiniteLoading from 'vue-infinite-loading'
-
-import VideoService from '@/services/VideoService'
-import SubscriptionService from '@/services/SubscriptionService'
-import FeelingService from '@/services/FeelingService'
-import HistoryService from '@/services/HistoryService'
-
-import SigninModal from '@/components/SigninModal'
 import AddComment from '@/components/comments/AddComment'
 import CommentList from '@/components/comments/CommentList'
+import SigninModal from '@/components/SigninModal'
+import FeelingService from '@/services/FeelingService'
+import HistoryService from '@/services/HistoryService'
+import SubscriptionService from '@/services/SubscriptionService'
+import VideoService from '@/services/VideoService'
+import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
+import { mapGetters } from 'vuex'
+
+
 
 export default {
   data: () => ({
