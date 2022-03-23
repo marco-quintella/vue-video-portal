@@ -27,63 +27,66 @@
               >
                 <div ref="hello">
                   <v-responsive max-height="480">
-                    <iframe :src="`https://upvideo.to/e/${video.filecode}`" scrolling="no" frameborder="0" width="100%" height="480px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                    <iframe
+                      :src="`https://upvideo.to/e/${video.filecode}`"
+                      scrolling="no"
+                      frameborder="0"
+                      width="100%"
+                      height="480px"
+                      allowfullscreen="true"
+                      webkitallowfullscreen="true"
+                      mozallowfullscreen="true"
+                    ></iframe>
                   </v-responsive>
 
                   <v-card flat tile class="card">
-                    <v-card-title class="pl-0 pb-0">{{
-                      video.title
-                    }}</v-card-title>
-                    <div
-                      class="d-flex flex-wrap justify-space-between"
-                      id="btns"
-                    >
+                    <v-card-title class="pl-0 pb-0">{{ video.title }}</v-card-title>
+                    <div class="d-flex flex-wrap justify-space-between" id="btns">
                       <v-card-subtitle
                         class="pl-0 pt-0 pb-0 subtitle-1"
                         style="line-height: 2.4em;"
                       >
-                        {{ video.views }} views<v-icon>mdi-circle-small</v-icon
-                        >{{ dateFormatter(video.createdAt) }}
+                        {{ video.views }} views
+                        <v-icon>mdi-circle-small</v-icon>
+                        {{ dateFormatter(video.createdAt) }}
                       </v-card-subtitle>
                       <v-card-actions class="pt-0 pl-0">
-                        <v-btn text @click="createFeeling('like')"
-                          ><v-icon
+                        <v-btn text @click="createFeeling('like')">
+                          <v-icon
                             :class="
-                              `pr-2${
-                                feeling !== 'like'
-                                  ? ' grey--text text--darken-1'
-                                  : ''
+                              `pr-2${feeling !== 'like'
+                                ? ' grey--text text--darken-1'
+                                : ''
                               }`
                             "
-                            >mdi-thumb-up</v-icon
-                          >{{ video.likes }}</v-btn
-                        >
+                          >mdi-thumb-up</v-icon>
+                          {{ video.likes }}
+                        </v-btn>
 
-                        <v-btn text @click="createFeeling('dislike')"
-                          ><v-icon
+                        <v-btn text @click="createFeeling('dislike')">
+                          <v-icon
                             :class="
-                              `pr-2${
-                                feeling !== 'dislike'
-                                  ? ' grey--text text--darken-1'
-                                  : ''
+                              `pr-2${feeling !== 'dislike'
+                                ? ' grey--text text--darken-1'
+                                : ''
                               }`
                             "
-                            >mdi-thumb-down</v-icon
-                          >
-                          {{ video.dislikes }}</v-btn
-                        >
-                        <v-btn
+                          >mdi-thumb-down</v-icon>
+                          {{ video.dislikes }}
+                        </v-btn>
+                        <!-- <v-btn
                           :href="`${url}/uploads/videos/${video.url}`"
                           text
                           class="grey--text text--darken-1"
-                          ><v-icon>mdi-download</v-icon> Download</v-btn
                         >
+                          <v-icon>mdi-download</v-icon>Download
+                        </v-btn> -->
                         <!-- <v-btn text class="grey--text text--darken-1"
                           ><v-icon>mdi-share</v-icon> Share</v-btn
                         >
                         <v-btn text class="grey--text text--darken-1"
                           ><v-icon>mdi-playlist-plus</v-icon> Save</v-btn
-                        > -->
+                        >-->
                       </v-card-actions>
                     </div>
                   </v-card>
@@ -92,10 +95,7 @@
                     <v-col cols="12" sm="6" md="5" lg="5">
                       <v-card class="transparent" flat>
                         <v-list-item three-line>
-                          <v-list-item-avatar
-                            v-if="typeof video.userId !== 'undefined'"
-                            size="50"
-                          >
+                          <v-list-item-avatar v-if="typeof video.userId !== 'undefined'" size="50">
                             <img
                               v-if="video.userId.photoUrl !== 'no-photo.jpg'"
                               :src="
@@ -104,26 +104,20 @@
                               :alt="`${video.userId.channelName} avatar`"
                             />
                             <v-avatar v-else color="red">
-                              <span class="white--text headline ">
+                              <span class="white--text headline">
                                 {{
                                   video.userId.channelName
                                     .split('')[0]
                                     .toUpperCase()
-                                }}</span
-                              >
+                                }}
+                              </span>
                             </v-avatar>
                           </v-list-item-avatar>
-                          <v-list-item-content
-                            v-if="video.userId"
-                            class="align-self-auto"
-                          >
+                          <v-list-item-content v-if="video.userId" class="align-self-auto">
                             <v-list-item-title
                               class="font-weight-medium mb-1"
-                              >{{ video.userId.channelName }}</v-list-item-title
-                            >
-                            <v-list-item-subtitle
-                              >{{ video.userId.subscribers }} subscribers
-                            </v-list-item-subtitle>
+                            >{{ video.userId.channelName }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ video.userId.subscribers }} subscribers</v-list-item-subtitle>
                           </v-list-item-content>
                         </v-list-item>
                       </v-card>
@@ -149,8 +143,7 @@
                           depressed
                           :loading="subscribeLoading"
                           @click="subscribe"
-                          >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-                        >
+                        >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn>
 
                         <v-btn
                           v-else-if="showSubBtn"
@@ -166,8 +159,7 @@
                           depressed
                           :loading="subscribeLoading"
                           @click="subscribe"
-                          >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-                        >
+                        >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn>
 
                         <!-- <v-btn
                           v-if="
@@ -186,10 +178,10 @@
                           :loading="subscribeLoading"
                           @click="subscribe"
                           >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-                        > -->
+                        >-->
                         <!-- <v-btn icon class="ml-5 mt-6"
                           ><v-icon>mdi-bell</v-icon></v-btn
-                        > -->
+                        >-->
                       </div>
                     </v-col>
                     <v-col class="pl-11" offset="1" cols="11" md="11">
@@ -200,9 +192,7 @@
                             : video.description
                         }}
                       </p>
-                      <v-btn text @click="show" class="remove-hover-bg"
-                        >Show More</v-btn
-                      >
+                      <v-btn text @click="show" class="remove-hover-bg">Show More</v-btn>
                     </v-col>
                   </v-row>
                 </div>
@@ -212,14 +202,8 @@
                 <v-col v-if="video && video.status === 'public'">
                   <p class="mb-0">{{ video.comments }} Comments</p>
 
-                  <AddComment
-                    @videoCommentLength="video.comments++"
-                    :videoId="video._id"
-                  />
-                  <CommentList
-                    @videoCommentLength="video.comments--"
-                    :videoId="video._id"
-                  />
+                  <AddComment @videoCommentLength="video.comments++" :videoId="video._id" />
+                  <CommentList @videoCommentLength="video.comments--" :videoId="video._id" />
                 </v-col>
               </v-row>
             </v-col>
@@ -227,11 +211,7 @@
             <v-col cols="12" sm="12" md="4" lg="4">
               <hr class="grey--text" />
               <h4 class="mb-3 mt-3">Up next</h4>
-              <div
-                v-for="(video, i) in loading ? 12 : videos"
-                :key="i"
-                class="mb-5"
-              >
+              <div v-for="(video, i) in loading ? 12 : videos" :key="i" class="mb-5">
                 <v-skeleton-loader
                   class="mx-auto"
                   type="list-item-avatar-three-line"
@@ -239,13 +219,7 @@
                   tile
                   large
                 >
-                  <v-card
-                    class="card"
-                    tile
-                    flat
-                    v-if="!loading"
-                    :to="`/watch/${video._id}`"
-                  >
+                  <v-card class="card" tile flat v-if="!loading" :to="`/watch/${video._id}`">
                     <v-row no-gutters>
                       <v-col class="mx-auto" cols="12" sm="12" md="5" lg="5">
                         <!-- <v-responsive max-height="100%"> -->
@@ -255,8 +229,7 @@
                           :src="
                             `${url}/uploads/thumbnails/${video.thumbnailUrl}`
                           "
-                        >
-                        </v-img>
+                        ></v-img>
                         <!-- </v-responsive> -->
                       </v-col>
                       <v-col>
@@ -264,18 +237,13 @@
                           <v-card-title
                             class="pl-2 pt-0 subtitle-1 font-weight-bold"
                             style="line-height: 1"
-                          >
-                            {{ video.title }}
-                          </v-card-title>
+                          >{{ video.title }}</v-card-title>
 
-                          <v-card-subtitle
-                            class="pl-2 pt-2 pb-0"
-                            style="line-height: 1"
-                          >
-                            {{ video.userId.channelName }}<br />
-                            {{ video.views }} views<v-icon
-                              >mdi-circle-small</v-icon
-                            >
+                          <v-card-subtitle class="pl-2 pt-2 pb-0" style="line-height: 1">
+                            {{ video.userId.channelName }}
+                            <br />
+                            {{ video.views }} views
+                            <v-icon>mdi-circle-small</v-icon>
                             {{ dateFormatter(video.createdAt) }}
                           </v-card-subtitle>
                         </div>
@@ -287,10 +255,7 @@
               <!-- <v-col cols="12" sm="12" md="12" lg="12"> -->
               <infinite-loading :identifier="infiniteId" @infinite="getVideos">
                 <div slot="spinner">
-                  <v-progress-circular
-                    indeterminate
-                    color="red"
-                  ></v-progress-circular>
+                  <v-progress-circular indeterminate color="red"></v-progress-circular>
                 </div>
                 <div slot="no-results"></div>
                 <span slot="no-more"></span>
@@ -317,11 +282,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <signin-modal
-      :openModal="signinDialog"
-      :details="details"
-      @closeModal="signinDialog = false"
-    />
+    <signin-modal :openModal="signinDialog" :details="details" @closeModal="signinDialog = false" />
   </div>
 </template>
 
@@ -590,7 +551,7 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     this.page = 1
-    ;(this.loading = false), (this.loaded = false), (this.videos = [])
+      ; (this.loading = false), (this.loaded = false), (this.videos = [])
     this.infiniteId += 1
     this.getVideo(to.params.id)
     next()
