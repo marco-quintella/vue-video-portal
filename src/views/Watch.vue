@@ -26,8 +26,8 @@
                 large
               >
                 <div ref="hello">
-                  <v-responsive max-height="450">
-                    <iframe :src="`https://upvideo.to/e/${video.filecode}`" scrolling="no" frameborder="0" width="100%" height="100%" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  <v-responsive max-height="480">
+                    <iframe :src="`https://upvideo.to/e/${video.filecode}`" scrolling="no" frameborder="0" width="100%" height="480px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
                   </v-responsive>
 
                   <v-card flat tile class="card">
