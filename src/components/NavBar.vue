@@ -125,6 +125,13 @@
 
           <v-divider></v-divider>
 
+          <v-list v-if="currentUser.role ==='admin'">
+          <v-list-item router to="/admin/categories">
+            <v-list-item-title>Categories</v-list-item-title>
+          </v-list-item></v-list>
+
+          <v-divider v-if="currentUser.role === 'admin'"></v-divider>
+
           <v-list>
             <v-list-item
               router
@@ -276,9 +283,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SubscriptionService from '@/services/SubscriptionService'
 import HistoryService from '@/services/HistoryService'
+import SubscriptionService from '@/services/SubscriptionService'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({

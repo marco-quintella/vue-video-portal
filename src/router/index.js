@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
 import StudioNavBar from '@/components/StudioNavBar.vue'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
@@ -103,6 +103,20 @@ const routes = [
           import(
             /* webpackChunkName: "dashboard" */ '../views/Channel/Home.vue'
           )
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    components: {
+      NavBar,
+      default: () => import(/* webpackChunkName: "Admin" */ '../views/Admin/Index.vue')
+    },
+    children: [
+      {
+        path: "categories",
+        name: 'CategoriesAdmin',
+        component: () => import(/* webpackChunkName: "categoriesAdmin" */ '../views/Admin/Categories.vue')
       }
     ]
   },
