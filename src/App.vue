@@ -2,7 +2,7 @@
   <v-app>
     <router-view name="NavBar"></router-view>
     <router-view name="StudioNavBar"></router-view>
-    <v-content
+    <v-main
       :class="{
         'content-bg': ![
           'SignIn',
@@ -16,7 +16,7 @@
       }"
     >
       <router-view></router-view>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
