@@ -43,7 +43,6 @@
                 <v-row no-gutters justify="center">
                   <v-col cols="10" sm="10" md="3" lg="3" class="d-flex">
                     <!-- <v-responsive max-height="100%"> -->
-
                     <v-avatar size="120" max-width="150" class="mx-auto red">
                       <img
                         v-if="result.photoUrl !== 'no-photo.jpg'"
@@ -52,10 +51,8 @@
                       />
                       <template v-else color="red">
                         <span class="white--text display-1">
-                          {{
-                            result.channelName.split('')[0].toUpperCase()
-                          }}</span
-                        >
+                          {{ result.channelName.split("")[0].toUpperCase() }}
+                        </span>
                       </template>
                     </v-avatar>
                     <!-- </v-responsive> -->
@@ -103,9 +100,7 @@
                   <v-col cols="5" sm="3" md="3" lg="3">
                     <v-img
                       class="align-center"
-                      :src="
-                        `${getUrl}/uploads/thumbnails/${result.thumbnailUrl}`
-                      "
+                      :src="`${getUrl}/uploads/thumbnails/${result.thumbnailUrl}`"
                       :alt="`${result.userId.channelName} avatar`"
                     >
                     </v-img>
@@ -171,9 +166,9 @@
 </template>
 
 <script>
-import InfiniteLoading from 'vue-infinite-loading'
-import { mapGetters } from 'vuex'
-import SearchService from '@/services/SearchService'
+import InfiniteLoading from "vue-infinite-loading";
+import { mapGetters } from "vuex";
+import SearchService from "@/services/SearchService";
 
 export default {
   data: () => ({
@@ -182,64 +177,64 @@ export default {
     loaded: false,
     page: 1,
     results: [],
-    text: '',
-    infiniteId: +new Date()
+    text: "",
+    infiniteId: +new Date(),
   }),
   computed: {
-    ...mapGetters(['getUrl'])
+    ...mapGetters(["getUrl"]),
   },
   methods: {
     async getSearchResults($state) {
-      this.errored = false
+      this.errored = false;
       if (!this.loaded) {
-        this.loading = true
+        this.loading = true;
       }
       const results = await SearchService.search(this.page, {
-        text: this.text
+        text: this.text,
       })
         .catch((err) => {
-          console.log(err)
-          this.errored = true
+          console.log(err);
+          this.errored = true;
         })
         .finally(() => {
-          this.loading = false
-        })
+          this.loading = false;
+        });
 
-      if (!results) return
+      if (!results) return;
       // console.log(results)
       if (results.data.data.length) {
-        this.page += 1
+        this.page += 1;
 
-        this.results.push(...results.data.data)
+        this.results.push(...results.data.data);
         if ($state) {
-          $state.loaded()
+          $state.loaded();
         }
 
-        this.loaded = true
+        this.loaded = true;
       } else {
         if ($state) {
-          $state.complete()
+          $state.complete();
         }
       }
-    }
+    },
   },
   components: {
-    InfiniteLoading
+    InfiniteLoading,
   },
   beforeRouteUpdate(to, from, next) {
     // console.log(to.query['search-query'])
-    if (to.query['search-query'] === '') return
-    this.text = to.query['search-query']
-    this.page = 1
-    this.results = []
-    this.infiniteId += 1
+    if (to.query["search-query"] === "") return;
+    this.text = to.query["search-query"];
+    this.page = 1;
+    this.results = [];
+    this.infiniteId += 1;
 
-    next()
+    next();
   },
   mounted() {
-    this.text = this.$route.query['search-query']
-  }
-}
+    this.text = this.$route.query["search-query"];
+  },
+};
 </script>
 
 <style></style>

@@ -19,7 +19,7 @@
                     <v-list-item-avatar size="80">
                       <v-img
                         v-if="channel.photoUrl !== 'no-photo.jpg'"
-                        :src="`${url}/uploads/avatars/${channel.photoUrl}`"
+                        :src="channel.photoUrl"
                       ></v-img>
 
                       <v-avatar v-else color="red" size="60">
