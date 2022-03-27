@@ -213,7 +213,7 @@ export default {
         personalInfo: false,
         password: false
       },
-      imgDataUrl: `${process.env.VUE_APP_URL}/uploads/avatars/${this.$store.getters.currentUser.photoUrl}`,
+      imgDataUrl: this.$store.getters.currentUser.photoUrl,
       url: `${process.env.VUE_APP_URL}/api/v1/auth/avatar`,
       headers: { Authorization: `Bearer ${this.$store.getters.getToken}` }
     }
@@ -316,11 +316,11 @@ export default {
       // console.log(this.imgDataUrl)
       // console.log(field)
     },
-    cropUploadSuccess(jsonData, field) {
+    async cropUploadSuccess(jsonData, field) {
       // console.log('-------- upload success --------')
       const user = this.$store.getters.currentUser
       user.photoUrl = jsonData.data
-      this.$store.dispatch('signin', user)
+      await this.$store.dispatch('signin', user)
       console.log('field: ' + field)
     },
 

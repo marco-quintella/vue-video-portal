@@ -5,33 +5,49 @@
     flat
     tile
     router
-    :to="(video.status != 'processing' || video.status != 'uploading') ? `/watch/${video._id}` : ''"
+    :to="
+      video.status != 'processing' || video.status != 'uploading'
+        ? `/watch/${video._id}`
+        : ''
+    "
   >
     <v-img
-      :src="(video.status != 'processing' || video.status != 'uploading') ? urlExist(video.thumbnailUrl) ? video.thumbnailUrl : `${url}/uploads/thumbnails/no-image.jpg` : `${url}/uploads/thumbnails/loading.webp`"
+      :src="
+        video.status != 'processing' || video.status != 'uploading'
+          ? urlExist(video.thumbnailUrl)
+            ? video.thumbnailUrl
+            : `${url}/uploads/thumbnails/no-image.jpg`
+          : `${url}/uploads/thumbnails/loading.webp`
+      "
     >
       <v-row
         v-if="video.status === 'processing' || video.status === 'uploading'"
         class="fill-height ma-0"
         align="center"
         justify="center"
-        style="background-color: rgba(0, 0, 0, 0.5);"
+        style="background-color: rgba(0, 0, 0, 0.5)"
       >
-        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+        <v-progress-circular
+          indeterminate
+          color="grey lighten-5"
+        ></v-progress-circular>
       </v-row>
     </v-img>
     <v-row no-gutters>
       <v-col cols="auto" v-if="card.type != 'noAvatar'">
         <div class="pl-0 pt-3 pr-3" router :to="`/channels/${channel._id}`">
-          <v-img
-            v-if="channel.photoUrl !== 'no-photo.jpg'"
-            width="36px"
-            height="36px"
-            class="elevation-6"
-            :src="`${url}/uploads/avatars/${channel.photoUrl}`"
-          ></v-img>
+          <v-avatar v-if="channel.photoUrl !== 'no-photo.jpg'" size="36">
+            <v-img
+              width="36px"
+              height="36px"
+              class="elevation-6"
+              :src="channel.photoUrl"
+            ></v-img>
+          </v-avatar>
           <v-avatar v-else color="red" size="36">
-            <span class="white--text headline">{{ channel.channelName.split('')[0].toUpperCase() }}</span>
+            <span class="white--text headline">{{
+              channel.channelName.split("")[0].toUpperCase()
+            }}</span>
           </v-avatar>
         </div>
       </v-col>
@@ -42,7 +58,11 @@
         >
           <router-link
             class="text-primary"
-            :to="(video.status != 'processing' || video.status != 'uploading') ? `/watch/${video._id}` : ''"
+            :to="
+              video.status != 'processing' || video.status != 'uploading'
+                ? `/watch/${video._id}`
+                : ''
+            "
           >
             <div class="video-title">{{ video.title }}</div>
           </router-link>
@@ -52,7 +72,12 @@
             <div
               id="byline-container"
               class="d-flex flex-wrap align-center"
-              style="font-size: 12px; line-height: 18px; font-weight: 400; max-width: 100%;"
+              style="
+                font-size: 12px;
+                line-height: 18px;
+                font-weight: 400;
+                max-width: 100%;
+              "
             >
               <router-link
                 class="d-flex flex-row align-center"
@@ -65,10 +90,24 @@
             <div
               id="metadata-line"
               class="d-flex overflow-hidden"
-              style="font-size: 12px; line-height: 18px; font-weight: 400; max-width: 100%; max-height: 36px; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; white-space: normal;"
+              style="
+                font-size: 12px;
+                line-height: 18px;
+                font-weight: 400;
+                max-width: 100%;
+                max-height: 36px;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                white-space: normal;
+              "
             >
-              <span class="d-inline-block meta-block">{{ video.views }} views</span>
-              <span class="d-inline-block">{{ dateFormatter(video.createdAt) }}</span>
+              <span class="d-inline-block meta-block"
+                >{{ video.views }} views</span
+              >
+              <span class="d-inline-block">{{
+                dateFormatter(video.createdAt)
+              }}</span>
             </div>
           </div>
         </div>
@@ -78,8 +117,8 @@
 </template>
 
 <script>
-import moment from "moment"
-import { default as _urlExist } from 'url-exist'
+import moment from "moment";
+import { default as _urlExist } from "url-exist";
 
 export default {
   name: "VideoCard",
@@ -97,17 +136,17 @@ export default {
   data() {
     return {
       url: process.env.VUE_APP_URL,
-    }
+    };
   },
   methods: {
     dateFormatter(date) {
-      return moment(date).fromNow()
+      return moment(date).fromNow();
     },
     urlExist(url) {
-      return _urlExist(url)
-    }
+      return _urlExist(url);
+    },
   },
-}
+};
 </script>
 
 <style lang="scss">

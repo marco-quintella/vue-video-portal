@@ -2,14 +2,15 @@
   <nav id="studioBar">
     <v-app-bar class="white" app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="font-weight-bold"
-        ><router-link
+      <v-toolbar-title class="font-weight-bold">
+        <router-link
           to="/studio"
           class="black--text"
           style="text-decoration: none"
-          >Studio</router-link
-        ></v-toolbar-title
-      >
+        >
+          Studio
+        </router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
         flat
@@ -32,20 +33,21 @@
                 class="mr-8 createVideoBtn"
                 outlined
                 v-on="{ ...tooltip, ...menu }"
-                ><v-icon size="25" class="red--text small"
-                  >mdi-video-plus</v-icon
-                >
-                Create</v-btn
               >
+                <v-icon size="25" class="red--text small">
+                  mdi-video-plus
+                </v-icon>
+                Create
+              </v-btn>
             </template>
             <span>Create a video and more</span>
           </v-tooltip>
         </template>
         <v-list>
           <v-list-item @click="modal">
-            <v-list-item-icon class="mr-3"
-              ><v-icon>mdi-play-box-outline</v-icon></v-list-item-icon
-            >
+            <v-list-item-icon class="mr-3">
+              <v-icon>mdi-play-box-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>Upload video</v-list-item-title>
           </v-list-item>
           <!-- <v-list-item>
@@ -62,13 +64,13 @@
           <v-btn small color="red" depressed fab v-on="on" class="white--text">
             <v-avatar v-if="currentUser.photoUrl !== 'no-photo.jpg'">
               <img
-                :src="`${getUrl}/uploads/avatars/${currentUser.photoUrl}`"
+                :src="currentUser.photoUrl"
                 :alt="`${currentUser.channelName} avatar`"
               />
             </v-avatar>
             <template v-else>
               <span class="headline">
-                {{ currentUser.channelName.split('')[0].toUpperCase() }}
+                {{ currentUser.channelName.split("")[0].toUpperCase() }}
               </span>
             </template>
           </v-btn>
@@ -80,28 +82,26 @@
               <v-list-item-avatar>
                 <v-avatar v-if="currentUser.photoUrl !== 'no-photo.jpg'">
                   <img
-                    :src="`${getUrl}/uploads/avatars/${currentUser.photoUrl}`"
+                    :src="currentUser.photoUrl"
                     :alt="`${currentUser.channelName} avatar`"
                   />
                 </v-avatar>
                 <template v-else>
                   <v-avatar color="red">
-                    <span class="white--text headline ">
-                      {{
-                        currentUser.channelName.split('')[0].toUpperCase()
-                      }}</span
-                    >
+                    <span class="white--text headline">
+                      {{ currentUser.channelName.split("")[0].toUpperCase() }}
+                    </span>
                   </v-avatar>
                 </template>
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title class="text-capitalize">{{
-                  currentUser.channelName
-                }}</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  currentUser.email
-                }}</v-list-item-subtitle>
+                <v-list-item-title class="text-capitalize">
+                  {{ currentUser.channelName }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ currentUser.email }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -154,9 +154,9 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title class=" font-weight-medium subtitle-2">{{
-                item.title
-              }}</v-list-item-title>
+              <v-list-item-title class="font-weight-medium subtitle-2">
+                {{ item.title }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -180,9 +180,9 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title class=" font-weight-medium subtitle-2">{{
-                  item.title
-                }}</v-list-item-title>
+                <v-list-item-title class="font-weight-medium subtitle-2">
+                  {{ item.title }}
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -208,13 +208,13 @@
                   v-if="currentUser.photoUrl !== 'no-photo.jpg'"
                 >
                   <img
-                    :src="`${getUrl}/uploads/avatars/${currentUser.photoUrl}`"
+                    :src="currentUser.photoUrl"
                     :alt="`${currentUser.channelName} avatar`"
                   />
                 </v-avatar>
                 <!-- <template > -->
                 <span v-else class="display-3">
-                  {{ currentUser.channelName.split('')[0].toUpperCase() }}
+                  {{ currentUser.channelName.split("")[0].toUpperCase() }}
                 </span>
                 <!-- </template> -->
                 <!-- <span class="display-3" v-if="currentUser.photoUrl === 'no-photo.jpg'">
@@ -225,12 +225,12 @@
 
             <v-list-item link :to="`/channels/${currentUser._id}`">
               <v-list-item-content>
-                <v-list-item-title class="title">{{
-                  currentUser.channelName
-                }}</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  currentUser.email
-                }}</v-list-item-subtitle>
+                <v-list-item-title class="title">
+                  {{ currentUser.channelName }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ currentUser.email }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -249,24 +249,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
-import UploadVideoModal from '@/components/UploadVideoModal'
-import SettingsModal from '@/components/SettingsModal'
+import UploadVideoModal from "@/components/UploadVideoModal";
+import SettingsModal from "@/components/SettingsModal";
 export default {
-  name: 'StudioNavBar',
+  name: "StudioNavBar",
   data: () => ({
     drawer: false,
     items: [
       {
-        header: 'scroll',
+        header: "scroll",
         pages: [
-          { title: 'Dashboard', link: '/studio', icon: 'mdi-view-dashboard' },
+          { title: "Dashboard", link: "/studio", icon: "mdi-view-dashboard" },
           {
-            title: 'Videos',
-            link: '/studio/videos',
-            icon: 'mdi-play-box-multiple'
-          }
+            title: "Videos",
+            link: "/studio/videos",
+            icon: "mdi-play-box-multiple",
+          },
           // {
           //   title: 'Playlists',
           //   link: '#p',
@@ -298,55 +298,55 @@ export default {
           //   link: '#al',
           //   icon: 'mdi-music-box-multiple'
           // }
-        ]
+        ],
       },
       {
-        header: 'fixed',
+        header: "fixed",
         pages: [
           {
-            title: 'Settings',
-            link: '',
-            icon: 'mdi-cog'
+            title: "Settings",
+            link: "",
+            icon: "mdi-cog",
           },
           {
-            title: 'Send feedback',
-            link: '#sf',
-            icon: 'mdi-history'
+            title: "Send feedback",
+            link: "#sf",
+            icon: "mdi-history",
           },
           {
-            title: 'Creator Studio Classic',
-            link: '#cs',
-            icon: 'mdi-play-box-outline'
-          }
-        ]
-      }
+            title: "Creator Studio Classic",
+            link: "#cs",
+            icon: "mdi-play-box-outline",
+          },
+        ],
+      },
     ],
     dialog: false,
-    settingsDialog: false
+    settingsDialog: false,
   }),
   computed: {
-    ...mapGetters(['currentUser', 'getUrl'])
+    ...mapGetters(["currentUser", "getUrl"]),
   },
   methods: {
     search() {
-      console.log('hello')
+      console.log("hello");
     },
     modal() {
-      this.dialog = true
+      this.dialog = true;
     },
     settingsMoal(title) {
-      if (title !== 'Settings') return
-      this.settingsDialog = true
-    }
+      if (title !== "Settings") return;
+      this.settingsDialog = true;
+    },
   },
   components: {
     UploadVideoModal,
-    SettingsModal
+    SettingsModal,
   },
   mounted() {
-    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true
-  }
-}
+    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true;
+  },
+};
 </script>
 
 <style lang="scss">
