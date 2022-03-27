@@ -46,7 +46,7 @@
                     <v-avatar size="120" max-width="150" class="mx-auto red">
                       <img
                         v-if="result.photoUrl !== 'no-photo.jpg'"
-                        :src="`${getUrl}/uploads/avatars/${result.photoUrl}`"
+                        :src="result.photoUrl"
                         :alt="`${result.channelName} avatar`"
                       />
                       <template v-else>
@@ -100,7 +100,7 @@
                   <v-col cols="5" sm="3" md="3" lg="3">
                     <v-img
                       class="align-center"
-                      :src="`${getUrl}/uploads/thumbnails/${result.thumbnailUrl}`"
+                      :src="result.thumbnailUrl"
                       :alt="`${result.userId.channelName} avatar`"
                     >
                     </v-img>

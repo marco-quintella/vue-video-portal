@@ -104,12 +104,12 @@
                             v-if="typeof video.userId !== 'undefined'"
                             size="50"
                           >
-                            <img
+                            <v-img
                               v-if="video.userId.photoUrl !== 'no-photo.jpg'"
-                              :src="`${getUrl}/uploads/avatars/${video.userId.photoUrl}`"
+                              :src="video.userId.photoUrl"
                               :alt="`${video.userId.channelName} avatar`"
                             />
-                            <v-avatar v-else color="red">
+                            <v-avatar v-else color="primary">
                               <span class="white--text headline">
                                 {{
                                   video.userId.channelName
@@ -263,7 +263,7 @@
                         <v-img
                           class="align-center"
                           height="110"
-                          :src="`${url}/uploads/thumbnails/${video.thumbnailUrl}`"
+                          :src="video.thumbnailUrl"
                         ></v-img>
                         <!-- </v-responsive> -->
                       </v-col>
@@ -272,8 +272,9 @@
                           <v-card-title
                             class="pl-2 pt-0 subtitle-1 font-weight-bold"
                             style="line-height: 1"
-                            >{{ video.title }}</v-card-title
                           >
+                            {{ video.title }}
+                          </v-card-title>
 
                           <v-card-subtitle
                             class="pl-2 pt-2 pb-0"
@@ -397,7 +398,9 @@ export default {
       if (
         this.video.userId._id.toString() !== this.currentUser._id.toString() &&
         this.video.status !== 'public'
-      ) { return this.$router.push('/') }
+      ) {
+        return this.$router.push('/')
+      }
 
       const data = {
         type: 'watch',
@@ -467,7 +470,9 @@ export default {
       if (!feeling) return
 
       if (feeling.data.data.feeling === 'like') this.feeling = 'like'
-      else if (feeling.data.data.feeling === 'dislike') { this.feeling = 'dislike' }
+      else if (feeling.data.data.feeling === 'dislike') {
+        this.feeling = 'dislike'
+      }
     },
     async createFeeling (type) {
       if (!this.isAuthenticated) {
