@@ -74,6 +74,11 @@ h3,
   color: #030303 !important;
 }
 
+.text-subheader {
+  color: #030303 !important;
+  opacity: 0.87;
+}
+
 .small-text {
   font-size: 12px;
 }
