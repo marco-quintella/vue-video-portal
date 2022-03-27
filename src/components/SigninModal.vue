@@ -31,12 +31,12 @@ export default {
     }
   },
   computed: {
-    dialog() {
+    dialog () {
       return this.openModal
     }
   },
   methods: {
-    closeModal() {
+    closeModal () {
       this.$emit('closeModal')
     }
   }

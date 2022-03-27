@@ -187,7 +187,7 @@ import myUpload from 'vue-image-crop-upload'
 export default {
   name: 'SettingsModal',
   props: ['openDialog'],
-  data: function() {
+  data: function () {
     return {
       showCurrentPassword: false,
       showNewPassword: false,
@@ -219,12 +219,12 @@ export default {
     }
   },
   computed: {
-    dialog() {
+    dialog () {
       return this.openDialog
     }
   },
   methods: {
-    async submit() {
+    async submit () {
       if (this.loading.personalInfo) return
       this.loading.personalInfo = true
 
@@ -237,7 +237,7 @@ export default {
           const errors = err.response.data.error
 
           this.$refs.personalInfoForm.setErrors({
-            'email': errors.find((error) => {
+            email: errors.find((error) => {
               return error.field === 'email'
             })
               ? ['This email is already taken']
@@ -263,7 +263,7 @@ export default {
 
       this.closeModal()
     },
-    async submitPassword() {
+    async submitPassword () {
       if (this.loading.password) return
 
       this.loading.password = true
@@ -286,8 +286,8 @@ export default {
               return error.field === 'newPassword'
             })
               ? errors.find((error) => {
-                  return error.field === 'newPassword'
-                }).message
+                return error.field === 'newPassword'
+              }).message
               : null
           })
         })
@@ -301,14 +301,14 @@ export default {
       this.$store.dispatch('signOut')
       this.$router.push('/signin')
     },
-    closeModal() {
+    closeModal () {
       this.$emit('closeDialog')
     },
 
-    toggleShow() {
+    toggleShow () {
       this.show = !this.show
     },
-    cropSuccess(imgDataUrl, field) {
+    cropSuccess (imgDataUrl, field) {
       // console.log('-------- crop success --------')
       console.log(field)
       // console.log(imgDataUrl)
@@ -316,7 +316,7 @@ export default {
       // console.log(this.imgDataUrl)
       // console.log(field)
     },
-    async cropUploadSuccess(jsonData, field) {
+    async cropUploadSuccess (jsonData, field) {
       // console.log('-------- upload success --------')
       const user = this.$store.getters.currentUser
       user.photoUrl = jsonData.data
@@ -324,7 +324,7 @@ export default {
       console.log('field: ' + field)
     },
 
-    cropUploadFail(status, field) {
+    cropUploadFail (status, field) {
       console.log('-------- upload fail --------')
       console.log(status)
       console.log('field: ' + field)

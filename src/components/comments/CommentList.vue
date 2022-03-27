@@ -228,7 +228,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data: function () {
     return {
       repliesInput: {},
       comments: this.$store.getters.getComments.data,
@@ -244,7 +244,7 @@ export default {
     ...mapGetters(['isAuthenticated', 'currentUser'])
   },
   methods: {
-    async getComments() {
+    async getComments () {
       this.loading = true
       const comments = await this.$store
         .dispatch('setComments', this.videoId)
@@ -258,7 +258,7 @@ export default {
       // this.loading = false
       // console.log(this.$store.getters.getComments.data)
     },
-    async deleteComment(id) {
+    async deleteComment (id) {
       if (!this.isAuthenticated) return
       // this.$store.dispatch('deleteComment', id)
       this.comments = this.comments.filter(
@@ -276,7 +276,7 @@ export default {
       this.comments = this.$store.getters.getComments.data
       this.$emit('videoCommentLength')
     },
-    async addReply(event, id) {
+    async addReply (event, id) {
       if (!this.isAuthenticated) return
       if (this.$refs[`input${id}`][0].$refs.input.value == '') return
 
@@ -299,7 +299,7 @@ export default {
       reply.data.data.userId = this.$store.getters.currentUser
       // this.$store.dispatch('addComment', reply.data.data)
       // console.log(this.$store.getters.getComments.data)
-      let comment = this.comments.find(
+      const comment = this.comments.find(
         (comment) => comment._id.toString() === id.toString()
       )
       // console.log(comment)
@@ -324,22 +324,22 @@ export default {
       //   .find((comment) => comment._id === id)
       //   .replies.unshift(reply.data.data)
     },
-    clickTextField() {
+    clickTextField () {
       if (!this.isAuthenticated) return this.$router.push('/signin')
     },
-    showReply(id) {
+    showReply (id) {
       this.$refs[id][0].classList.toggle('d-none')
     },
-    hideReply(id) {
+    hideReply (id) {
       this.$refs[`form${id}`][0].reset()
       this.$refs['reply' + id][0].classList.toggle('d-none')
     },
-    dateFormatter(date) {
+    dateFormatter (date) {
       return moment(date).fromNow()
     }
   },
 
-  mounted() {
+  mounted () {
     this.getComments()
     // console.log(this.comments)
   }

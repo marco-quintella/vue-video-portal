@@ -2,18 +2,18 @@
 import Api from '@/services/Api'
 
 export default {
-  getAll(data, params) {
+  getAll (data, params) {
     return Api().get(`videos/${data}`, {
       params
     })
   },
-  getById(id) {
+  getById (id) {
     return Api().get(`videos/${id}`)
   },
-  getUploadUrl() {
+  getUploadUrl () {
     return Api().get('videos/url')
   },
-  uploadVideo(data, optional) {
+  uploadVideo (data, optional) {
     return Api().post('videos', data, optional)
   },
   // uploadVideo(data) {
@@ -23,16 +23,16 @@ export default {
   //     // baseURL: 'https://upbeat-almeida-b52076.netlify.app/.netlify/functions/upload-video'
   //   })
   // },
-  updateVideo(id, data) {
+  updateVideo (id, data) {
     return Api().put(`videos/${id}`, data)
   },
-  updateViews(id) {
+  updateViews (id) {
     return Api().put(`videos/${id}/views`)
   },
-  uploadThumbnail(id, data) {
+  uploadThumbnail (id, data) {
     return Api().put(`videos/${id}/thumbnails`, data)
   },
-  deleteById(id) {
+  deleteById (id) {
     return Api().delete(`videos/${id}`)
   }
 }

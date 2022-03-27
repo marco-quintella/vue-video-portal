@@ -88,7 +88,7 @@ export default {
     page: 1
   }),
   methods: {
-    async getVideos($state) {
+    async getVideos ($state) {
       if (!this.loaded) {
         this.loading = true
       }
@@ -113,7 +113,7 @@ export default {
         $state.complete()
       }
     },
-    dateFormatter(date) {
+    dateFormatter (date) {
       return moment(date).fromNow()
     }
   },

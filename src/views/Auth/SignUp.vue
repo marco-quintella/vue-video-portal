@@ -238,7 +238,7 @@ export default {
     loading: false
   }),
   methods: {
-    async signUp() {
+    async signUp () {
       this.loading = true
 
       const data = await this.$store
@@ -252,7 +252,7 @@ export default {
           const errors = err.response.data.error
 
           this.$refs.form.setErrors({
-            'Email': errors.find((error) => {
+            Email: errors.find((error) => {
               return error.field === 'email'
             })
               ? ['This email is already taken']

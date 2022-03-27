@@ -1,19 +1,19 @@
 import Api from '@/services/Api'
 
 export default {
-  getAll(filters) {
+  getAll (filters) {
     return Api().get(`users/?${filters}`)
   },
-  getById(id) {
+  getById (id) {
     return Api().get(`users/${id}`)
   },
-  createUser(data) {
+  createUser (data) {
     return Api().post('users', data)
   },
-  updateUser(data, id) {
+  updateUser (data, id) {
     return Api().put(`users/${id}`, data)
   },
-  deleteById(id) {
+  deleteById (id) {
     return Api().delete(`users/${id}`)
   }
 }

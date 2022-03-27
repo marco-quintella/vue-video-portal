@@ -78,7 +78,6 @@ import VideoService from '@/services/VideoService'
 import moment from 'moment'
 import InfiniteLoading from 'vue-infinite-loading'
 
-
 export default {
   name: 'Home',
   data: () => ({
@@ -89,7 +88,7 @@ export default {
     page: 1
   }),
   methods: {
-    async getVideos($state) {
+    async getVideos ($state) {
       if (!this.loaded) {
         this.loading = true
       }
@@ -114,7 +113,7 @@ export default {
         $state.complete()
       }
     },
-    dateFormatter(date) {
+    dateFormatter (date) {
       return moment(date).fromNow()
     }
   },

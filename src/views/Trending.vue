@@ -108,7 +108,7 @@ export default {
     ...mapGetters(['currentUser', 'getUrl', 'isAuthenticated'])
   },
   methods: {
-    async getVideos($state) {
+    async getVideos ($state) {
       if (!this.loaded) {
         this.loading = true
       }
@@ -136,13 +136,13 @@ export default {
         $state.complete()
       }
     },
-    truncateText(string = '', num) {
+    truncateText (string = '', num) {
       if (string.length <= num) {
         return string
       }
       return string.slice(0, num)
     },
-    dateFormatter(date) {
+    dateFormatter (date) {
       return moment(date).fromNow()
     }
   },

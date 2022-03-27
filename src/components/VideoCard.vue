@@ -117,36 +117,36 @@
 </template>
 
 <script>
-import moment from "moment";
-import { default as _urlExist } from "url-exist";
+import moment from 'moment'
+import { default as _urlExist } from 'url-exist'
 
 export default {
-  name: "VideoCard",
+  name: 'VideoCard',
   props: {
     video: {
       type: Object,
-      required: true,
+      required: true
     },
     channel: {
       type: Object,
-      required: true,
+      required: true
     },
-    card: Object,
+    card: Object
   },
-  data() {
+  data () {
     return {
-      url: process.env.VUE_APP_URL,
-    };
+      url: process.env.VUE_APP_URL
+    }
   },
   methods: {
-    dateFormatter(date) {
-      return moment(date).fromNow();
+    dateFormatter (date) {
+      return moment(date).fromNow()
     },
-    urlExist(url) {
-      return _urlExist(url);
-    },
-  },
-};
+    urlExist (url) {
+      return _urlExist(url)
+    }
+  }
+}
 </script>
 
 <style lang="scss">

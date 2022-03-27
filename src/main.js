@@ -39,7 +39,7 @@ extend('email', {
 
 extend('password', {
   params: ['target'],
-  validate(value, { target }) {
+  validate (value, { target }) {
     return value === target
   },
   message: 'Password does not match'

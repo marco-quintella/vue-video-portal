@@ -114,7 +114,7 @@ const routes = [
     },
     children: [
       {
-        path: "categories",
+        path: 'categories',
         name: 'CategoriesAdmin',
         component: () => import(/* webpackChunkName: "categoriesAdmin" */ '../views/Admin/Categories.vue')
       }

@@ -1,13 +1,13 @@
 import Api from '@/services/Api'
 
 export default {
-  checkFeeling(data) {
+  checkFeeling (data) {
     return Api().post('feelings/check', data)
   },
-  createFeeling(data) {
+  createFeeling (data) {
     return Api().post('feelings', data)
   },
-  getLikedVideos(page) {
+  getLikedVideos (page) {
     return Api().get('feelings/videos', {
       params: {
         page,

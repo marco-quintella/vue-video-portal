@@ -23,7 +23,7 @@ const getters = {
 }
 
 const mutations = {
-  SET_TOKEN(state, token) {
+  SET_TOKEN (state, token) {
     state.token = token
     if (token) {
       state.isUserLoggedIn = true
@@ -31,10 +31,10 @@ const mutations = {
       state.isUserLoggedIn = false
     }
   },
-  SET_USER_DATA(state, data) {
+  SET_USER_DATA (state, data) {
     state.user = data
   },
-  CLEAR_AUTH(state) {
+  CLEAR_AUTH (state) {
     state.token = null
     state.user = null
     state.isUserLoggedIn = false
@@ -42,7 +42,7 @@ const mutations = {
 }
 
 const actions = {
-  signUp({ commit }, credentials) {
+  signUp ({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       AuthenticationService.signUp(credentials)
         .then(({ data }) => {
@@ -53,7 +53,7 @@ const actions = {
         .catch((err) => reject(err))
     })
   },
-  signIn({ commit }, credentials) {
+  signIn ({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       AuthenticationService.signIn(credentials)
         .then(({ data }) => {
@@ -65,7 +65,7 @@ const actions = {
         .catch((err) => reject(err))
     })
   },
-  getCurrentUser({ commit }, token) {
+  getCurrentUser ({ commit }, token) {
     return new Promise((resolve, reject) => {
       AuthenticationService.me(token)
         .then(({ data }) => {
@@ -76,7 +76,7 @@ const actions = {
         .catch((err) => reject(err))
     })
   },
-  signOut({ commit }) {
+  signOut ({ commit }) {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     commit('CLEAR_AUTH')

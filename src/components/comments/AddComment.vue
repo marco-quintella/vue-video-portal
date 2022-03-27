@@ -50,7 +50,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data: function () {
     return {
       showCommentBtns: false,
       loading: false,
@@ -61,7 +61,7 @@ export default {
     ...mapGetters(['currentUser', 'getUrl', 'isAuthenticated'])
   },
   methods: {
-    async createComment() {
+    async createComment () {
       if (this.comment === '') return
 
       this.loading = true
@@ -84,7 +84,7 @@ export default {
       this.$store.dispatch('addComment', comment.data.data)
       this.$emit('videoCommentLength')
     },
-    clickTextField() {
+    clickTextField () {
       if (!this.isAuthenticated) return this.$router.push('/signin')
       this.showCommentBtns = true
     }

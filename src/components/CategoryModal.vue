@@ -55,53 +55,53 @@
   </v-dialog>
 </template>
 <script>
-import CategoryService from "../services/CategoryService";
+import CategoryService from '../services/CategoryService'
 export default {
-  name: "CategoryModal",
-  props: ["openDialog", "category"],
-  data() {
+  name: 'CategoryModal',
+  props: ['openDialog', 'category'],
+  data () {
     return {
       loading: false,
-      title: "",
-    };
+      title: ''
+    }
   },
   watch: {
     category: {
-      handler(v) {
-        if (v && v !== "new" && v.title) {
-          this.title = v.title;
+      handler (v) {
+        if (v && v !== 'new' && v.title) {
+          this.title = v.title
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   computed: {
-    dialog() {
-      return this.openDialog;
-    },
+    dialog () {
+      return this.openDialog
+    }
   },
   methods: {
-    closeModal() {
-      this.$emit("closeDialog");
+    closeModal () {
+      this.$emit('closeDialog')
     },
-    async onSubmit() {
+    async onSubmit () {
       try {
-        this.loading = true;
-        if (this.category === "new") {
-          await CategoryService.create({ title: this.title, description: " " });
+        this.loading = true
+        if (this.category === 'new') {
+          await CategoryService.create({ title: this.title, description: ' ' })
         } else {
           await CategoryService.findByIdAndUpdate(this.category._id, {
-            title: this.title,
-          });
+            title: this.title
+          })
         }
-        this.loading = false;
-        this.title = "";
-        this.closeModal();
+        this.loading = false
+        this.title = ''
+        this.closeModal()
       } catch (e) {
-        this.loading = false;
-        console.error(e);
+        this.loading = false
+        console.error(e)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

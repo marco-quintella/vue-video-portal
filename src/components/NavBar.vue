@@ -287,9 +287,9 @@
 </template>
 
 <script>
-import HistoryService from "@/services/HistoryService";
-import SubscriptionService from "@/services/SubscriptionService";
-import { mapGetters } from "vuex";
+import HistoryService from '@/services/HistoryService'
+import SubscriptionService from '@/services/SubscriptionService'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'NavBar',
@@ -300,14 +300,14 @@ export default {
       {
         header: null,
         pages: [
-          { title: "Home", link: "/", icon: "mdi-home" },
-          { title: "Trending", link: "/trending", icon: "mdi-fire" },
+          { title: 'Home', link: '/', icon: 'mdi-home' },
+          { title: 'Trending', link: '/trending', icon: 'mdi-fire' },
           {
-            title: "Subscriptions",
-            link: "/subscriptions",
-            icon: "mdi-youtube-subscription",
-          },
-        ],
+            title: 'Subscriptions',
+            link: '/subscriptions',
+            icon: 'mdi-youtube-subscription'
+          }
+        ]
       },
       {
         header: null,
@@ -318,9 +318,9 @@ export default {
           //   icon: 'mdi-play-box-multiple'
           // },
           {
-            title: "History",
-            link: "/history",
-            icon: "mdi-history",
+            title: 'History',
+            link: '/history',
+            icon: 'mdi-history'
           },
           // {
           //   title: 'Your videos',
@@ -335,14 +335,14 @@ export default {
           // },
 
           {
-            title: "Liked videos",
-            link: "/liked-videos",
-            icon: "mdi-thumb-up",
-          },
-        ],
+            title: 'Liked videos',
+            link: '/liked-videos',
+            icon: 'mdi-thumb-up'
+          }
+        ]
       },
       {
-        header: "Subscriptions",
+        header: 'Subscriptions',
         pages: [
           // {
           //   title: 'Traversy Media',
@@ -364,111 +364,110 @@ export default {
           //   link: '#ch',
           //   icon: 'mdi-badge-account'
           // }
-        ],
+        ]
       },
       {
-        header: "MORE FROM VUETUBE",
+        header: 'MORE FROM VUETUBE',
         pages: [
           {
-            title: "VueTube Premium",
-            link: "#vp",
-            icon: "mdi-youtube",
+            title: 'VueTube Premium',
+            link: '#vp',
+            icon: 'mdi-youtube'
           },
           {
-            title: "Gaming",
-            link: "#g",
-            icon: "mdi-youtube-gaming",
+            title: 'Gaming',
+            link: '#g',
+            icon: 'mdi-youtube-gaming'
           },
           {
-            title: "Live",
-            link: "#li",
-            icon: "mdi-access-point",
-          },
-        ],
+            title: 'Live',
+            link: '#li',
+            icon: 'mdi-access-point'
+          }
+        ]
       },
       {
         header: null,
         pages: [
           {
-            title: "Setting",
-            link: "#sg",
-            icon: "mdi-cog",
+            title: 'Setting',
+            link: '#sg',
+            icon: 'mdi-cog'
           },
           {
-            title: "Report history",
-            link: "#rh",
-            icon: "mdi-flag",
+            title: 'Report history',
+            link: '#rh',
+            icon: 'mdi-flag'
           },
           {
-            title: "Help",
-            link: "#hp",
-            icon: "mdi-help-circle",
+            title: 'Help',
+            link: '#hp',
+            icon: 'mdi-help-circle'
           },
           {
-            title: "Send feedback",
-            link: "#f",
-            icon: "mdi-message-alert",
-          },
-        ],
-      },
+            title: 'Send feedback',
+            link: '#f',
+            icon: 'mdi-message-alert'
+          }
+        ]
+      }
     ],
     links: [
-      { text: "About", link: "#" },
-      { text: "Press", link: "#" },
-      { text: "Copyrignt", link: "#" },
-      { text: "Contact us", link: "#" },
-      { text: "Creators", link: "#" },
-      { text: "Advertise", link: "#" },
-      { text: "Developers", link: "#" },
-      { text: "Terms", link: "#" },
-      { text: "Privacy", link: "#" },
-      { text: "Policy & Safety", link: "#" },
-      { text: "Test new features", link: "#" },
+      { text: 'About', link: '#' },
+      { text: 'Press', link: '#' },
+      { text: 'Copyrignt', link: '#' },
+      { text: 'Contact us', link: '#' },
+      { text: 'Creators', link: '#' },
+      { text: 'Advertise', link: '#' },
+      { text: 'Developers', link: '#' },
+      { text: 'Terms', link: '#' },
+      { text: 'Privacy', link: '#' },
+      { text: 'Policy & Safety', link: '#' },
+      { text: 'Test new features', link: '#' }
     ],
     channelLength: 0,
-    searchText: "",
+    searchText: ''
     // user: null
   }),
   computed: {
-    ...mapGetters(["currentUser", "getUrl", "isAuthenticated"]),
+    ...mapGetters(['currentUser', 'getUrl', 'isAuthenticated'])
   },
   methods: {
-    async search() {
-      if (!this.searchText) return;
+    async search () {
+      if (!this.searchText) return
       // console.log(this.searchText == this.$route.query['search-query'])
-      if (this.searchText == this.$route.query["search-query"]) return;
+      if (this.searchText == this.$route.query['search-query']) return
       // this.searchText = this.$route.query['search-query']
       const data = {
-        type: "search",
-        searchText: this.searchText,
-      };
+        type: 'search',
+        searchText: this.searchText
+      }
 
-      if (this.isAuthenticated)
+      if (this.isAuthenticated) {
         await HistoryService.createHistory(data).catch((err) =>
           console.log(err)
-        );
+        )
+      }
 
       this.$router.push({
-        name: "Search",
-        query: { "search-query": this.searchText },
-      });
+        name: 'Search',
+        query: { 'search-query': this.searchText }
+      })
     },
-    async getSubscribedChannels() {
+    async getSubscribedChannels () {
       const channels = await SubscriptionService.getSubscribedChannels(
         this.currentUser._id
-      ).catch((err) => console.log(err));
-      this.items[2].pages = channels.data.data;
-      this.channelLength = 3;
+      ).catch((err) => console.log(err))
+      this.items[2].pages = channels.data.data
+      this.channelLength = 3
     },
-    moreChannels() {
-      if (this.channelLength === 3)
-        this.channelLength = this.items[2].pages.length;
-      else this.channelLength = 3;
+    moreChannels () {
+      if (this.channelLength === 3) { this.channelLength = this.items[2].pages.length } else this.channelLength = 3
     },
-    signOut() {
-      this.$store.dispatch("signOut");
+    signOut () {
+      this.$store.dispatch('signOut')
       // this.$router.push('/')
-    },
+    }
   },
   // beforeRouteLeave(to, from, next) {
   //   this.searchText = ''
@@ -479,33 +478,33 @@ export default {
   //   this.searchText = to.query['search-query']
   //   next()
   // },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next((vm) => {
-      if (!to.query["search-query"] === "") return;
-      vm.searchText = to.query["search-query"];
+      if (!to.query['search-query'] === '') return
+      vm.searchText = to.query['search-query']
       // vm.getSearchResults(to.query['search-query'])
-    });
+    })
   },
-  mounted() {
+  mounted () {
     // if (this.$route.query['search-query'])
     //   this.searchText = this.$route.query['search-query']
 
-    if (this.currentUser) this.getSubscribedChannels();
+    if (this.currentUser) this.getSubscribedChannels()
     // this.user = this.$store.getters.currentUser
     // console.log(this.user)
-    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true;
+    this.drawer = !this.$vuetify.breakpoint.mdAndDown
     // console.log(this.$route.name)
-    this.drawer = this.$route.name === "Watch" ? false : this.drawer;
+    this.drawer = this.$route.name === 'Watch' ? false : this.drawer
   },
-  created() {
-    this.drawer = this.$route.name === "Watch" ? false : this.drawer;
+  created () {
+    this.drawer = this.$route.name === 'Watch' ? false : this.drawer
 
     if (!this.isAuthenticated) {
-      this.items[2].header = false;
-      this.items[0].pages.pop();
+      this.items[2].header = false
+      this.items[0].pages.pop()
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">

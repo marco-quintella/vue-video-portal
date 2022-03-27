@@ -32,56 +32,56 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import CategoryService from "../../services/CategoryService";
-import CategoryModal from "../../components/CategoryModal.vue";
+import { mapGetters } from 'vuex'
+import CategoryService from '../../services/CategoryService'
+import CategoryModal from '../../components/CategoryModal.vue'
 
 export default {
-  name: "CategoriesAdmin",
+  name: 'CategoriesAdmin',
   components: { CategoryModal },
-  data() {
+  data () {
     return {
       categories: null,
       editCategory: null,
       categoryModal: false,
       loading: true
-    };
+    }
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(['currentUser'])
   },
-  async mounted() {
-    await this.fetchCategories();
+  async mounted () {
+    await this.fetchCategories()
     this.loading = false
   },
   watch: {
     currentUser: {
-      handler(v) {
+      handler (v) {
         if (v && v.role) {
-          if (v.role !== "admin") this.$router.push({ name: "Home" });
+          if (v.role !== 'admin') this.$router.push({ name: 'Home' })
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
-    async fetchCategories() {
-      this.categories = await CategoryService.getAll();
-      this.categories = this.categories.data.data;
+    async fetchCategories () {
+      this.categories = await CategoryService.getAll()
+      this.categories = this.categories.data.data
     },
-    async closeDialog() {
-      this.categoryModal = false;
-      this.editCategory = null;
-      await this.fetchCategories();
+    async closeDialog () {
+      this.categoryModal = false
+      this.editCategory = null
+      await this.fetchCategories()
     },
-    onEdit(category) {
+    onEdit (category) {
       this.editCategory = category
       this.categoryModal = true
     },
-    onNew() {
+    onNew () {
       this.editCategory = 'new'
       this.categoryModal = true
     }
-  },
-};
+  }
+}
 </script>

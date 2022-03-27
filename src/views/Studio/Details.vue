@@ -119,7 +119,7 @@ import VideoService from '@/services/VideoService'
 
 export default {
   name: 'Details',
-  data() {
+  data () {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
       inputLoading: false,
@@ -150,7 +150,7 @@ export default {
     }
   },
   methods: {
-    async getVideo() {
+    async getVideo () {
       this.inputLoading = true
       let video = await VideoService.getById(this.$route.params.id)
         .catch((err) => {
@@ -170,7 +170,7 @@ export default {
       this.formData.category = video.categoryId.title
       this.imgDataUrl = `${process.env.VUE_APP_URL}/uploads/thumbnails/${video.thumbnailUrl}`
     },
-    async submit() {
+    async submit () {
       // if (this.$route.name === 'Dashboard')
       this.submitLoading = true
       this.formData.category = this.categories.find(
@@ -192,7 +192,7 @@ export default {
       this.$router.push('/studio/videos')
       // console.log('submittied')
     },
-    async getCategories() {
+    async getCategories () {
       this.categoryLoading = true
       const categories = await CategoryService.getAll()
         .catch((err) => {
@@ -205,16 +205,16 @@ export default {
       })
       this.categories = categories.data.data
     },
-    toggleShow() {
+    toggleShow () {
       this.show = !this.show
     },
-    cropSuccess(imgDataUrl, field) {
+    cropSuccess (imgDataUrl, field) {
       console.log('-------- crop success --------')
       console.log(field)
       this.imgDataUrl = imgDataUrl
     }
   },
-  mounted() {
+  mounted () {
     this.getVideo()
     this.getCategories()
   }

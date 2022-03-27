@@ -57,7 +57,7 @@ export default {
     UploadVideoModal,
     SubscribersModal
   },
-  mounted() {}
+  mounted () {}
 }
 </script>
 

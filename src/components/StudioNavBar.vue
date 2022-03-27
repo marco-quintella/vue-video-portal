@@ -249,24 +249,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
-import UploadVideoModal from "@/components/UploadVideoModal";
-import SettingsModal from "@/components/SettingsModal";
+import UploadVideoModal from '@/components/UploadVideoModal'
+import SettingsModal from '@/components/SettingsModal'
 export default {
-  name: "StudioNavBar",
+  name: 'StudioNavBar',
   data: () => ({
     drawer: false,
     items: [
       {
-        header: "scroll",
+        header: 'scroll',
         pages: [
-          { title: "Dashboard", link: "/studio", icon: "mdi-view-dashboard" },
+          { title: 'Dashboard', link: '/studio', icon: 'mdi-view-dashboard' },
           {
-            title: "Videos",
-            link: "/studio/videos",
-            icon: "mdi-play-box-multiple",
-          },
+            title: 'Videos',
+            link: '/studio/videos',
+            icon: 'mdi-play-box-multiple'
+          }
           // {
           //   title: 'Playlists',
           //   link: '#p',
@@ -298,55 +298,55 @@ export default {
           //   link: '#al',
           //   icon: 'mdi-music-box-multiple'
           // }
-        ],
+        ]
       },
       {
-        header: "fixed",
+        header: 'fixed',
         pages: [
           {
-            title: "Settings",
-            link: "",
-            icon: "mdi-cog",
+            title: 'Settings',
+            link: '',
+            icon: 'mdi-cog'
           },
           {
-            title: "Send feedback",
-            link: "#sf",
-            icon: "mdi-history",
+            title: 'Send feedback',
+            link: '#sf',
+            icon: 'mdi-history'
           },
           {
-            title: "Creator Studio Classic",
-            link: "#cs",
-            icon: "mdi-play-box-outline",
-          },
-        ],
-      },
+            title: 'Creator Studio Classic',
+            link: '#cs',
+            icon: 'mdi-play-box-outline'
+          }
+        ]
+      }
     ],
     dialog: false,
-    settingsDialog: false,
+    settingsDialog: false
   }),
   computed: {
-    ...mapGetters(["currentUser", "getUrl"]),
+    ...mapGetters(['currentUser', 'getUrl'])
   },
   methods: {
-    search() {
-      console.log("hello");
+    search () {
+      console.log('hello')
     },
-    modal() {
-      this.dialog = true;
+    modal () {
+      this.dialog = true
     },
-    settingsMoal(title) {
-      if (title !== "Settings") return;
-      this.settingsDialog = true;
-    },
+    settingsMoal (title) {
+      if (title !== 'Settings') return
+      this.settingsDialog = true
+    }
   },
   components: {
     UploadVideoModal,
-    SettingsModal,
+    SettingsModal
   },
-  mounted() {
-    this.drawer = this.$vuetify.breakpoint.mdAndDown ? false : true;
-  },
-};
+  mounted () {
+    this.drawer = !this.$vuetify.breakpoint.mdAndDown
+  }
+}
 </script>
 
 <style lang="scss">

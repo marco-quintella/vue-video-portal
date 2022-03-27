@@ -333,16 +333,16 @@
 </template>
 
 <script>
-import AddComment from "@/components/comments/AddComment"
-import CommentList from "@/components/comments/CommentList"
-import SigninModal from "@/components/SigninModal"
-import FeelingService from "@/services/FeelingService"
-import HistoryService from "@/services/HistoryService"
-import SubscriptionService from "@/services/SubscriptionService"
-import VideoService from "@/services/VideoService"
-import moment from "moment"
-import InfiniteLoading from "vue-infinite-loading"
-import { mapGetters } from "vuex"
+import AddComment from '@/components/comments/AddComment'
+import CommentList from '@/components/comments/CommentList'
+import SigninModal from '@/components/SigninModal'
+import FeelingService from '@/services/FeelingService'
+import HistoryService from '@/services/HistoryService'
+import SubscriptionService from '@/services/SubscriptionService'
+import VideoService from '@/services/VideoService'
+import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -353,255 +353,253 @@ export default {
     subscribed: false,
     subscribeLoading: false,
     showSubBtn: true,
-    feeling: "",
+    feeling: '',
     video: {},
-    videoId: "",
+    videoId: '',
     videos: [],
     page: 1,
     infiniteId: +new Date(),
     truncate: true,
     url: process.env.VUE_APP_URL,
     signinDialog: false,
-    details: {},
+    details: {}
   }),
   computed: {
-    ...mapGetters(["currentUser", "getUrl", "isAuthenticated"]),
+    ...mapGetters(['currentUser', 'getUrl', 'isAuthenticated'])
   },
   methods: {
-    async getVideo(id) {
-      this.errored = false;
-      this.videoLoading = true;
-      this.video = {};
+    async getVideo (id) {
+      this.errored = false
+      this.videoLoading = true
+      this.video = {}
       try {
-        const video = await VideoService.getById(id);
+        const video = await VideoService.getById(id)
 
-        if (!video) return this.$router.push("/");
-        this.video = video.data.data;
+        if (!video) return this.$router.push('/')
+        this.video = video.data.data
       } catch (err) {
-        this.errored = true;
-        console.log(err);
+        this.errored = true
+        console.log(err)
       } finally {
-        this.videoLoading = false;
-        this.checkSubscription(this.video.userId._id);
-        this.checkFeeling(this.video._id);
+        this.videoLoading = false
+        this.checkSubscription(this.video.userId._id)
+        this.checkFeeling(this.video._id)
       }
       if (this.currentUser && this.currentUser._id === this.video.userId._id) {
-        this.showSubBtn = false;
+        this.showSubBtn = false
       } else {
-        this.showSubBtn = true;
+        this.showSubBtn = true
       }
 
-      if (!this.isAuthenticated) return;
+      if (!this.isAuthenticated) return
 
       if (
         this.video.userId._id.toString() !== this.currentUser._id.toString() &&
-        this.video.status !== "public"
-      )
-        return this.$router.push("/");
+        this.video.status !== 'public'
+      ) { return this.$router.push('/') }
 
       const data = {
-        type: "watch",
-        videoId: this.video._id,
-      };
-
-      await HistoryService.createHistory(data).catch((err) => console.log(err));
-    },
-    async getVideos($state) {
-      this.errored = false;
-      if (!this.loaded) {
-        this.loading = true;
+        type: 'watch',
+        videoId: this.video._id
       }
-      const videos = await VideoService.getAll("public", { page: this.page })
-        .catch((err) => {
-          console.log(err);
-          this.errored = true;
-        })
-        .finally(() => (this.loading = false));
 
-      if (typeof videos === "undefined") return;
+      await HistoryService.createHistory(data).catch((err) => console.log(err))
+    },
+    async getVideos ($state) {
+      this.errored = false
+      if (!this.loaded) {
+        this.loading = true
+      }
+      const videos = await VideoService.getAll('public', { page: this.page })
+        .catch((err) => {
+          console.log(err)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+
+      if (typeof videos === 'undefined') return
 
       if (videos.data.data.length) {
-        this.page += 1;
+        this.page += 1
 
-        this.videos.push(...videos.data.data);
+        this.videos.push(...videos.data.data)
         if ($state) {
-          $state.loaded();
+          $state.loaded()
         }
 
-        this.loaded = true;
+        this.loaded = true
       } else {
         if ($state) {
-          $state.complete();
+          $state.complete()
         }
       }
     },
-    async checkSubscription(id) {
-      if (!this.isAuthenticated) return;
+    async checkSubscription (id) {
+      if (!this.isAuthenticated) return
 
-      this.loading = true;
+      this.loading = true
       const sub = await SubscriptionService.checkSubscription({ channelId: id })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
 
-      if (!sub) return;
+      if (!sub) return
 
-      if (!sub.data.data._id) this.subscribed = false;
-      else this.subscribed = true;
+      if (!sub.data.data._id) this.subscribed = false
+      else this.subscribed = true
     },
-    async checkFeeling(id) {
-      if (!this.isAuthenticated) return;
+    async checkFeeling (id) {
+      if (!this.isAuthenticated) return
 
-      this.loading = true;
+      this.loading = true
       const feeling = await FeelingService.checkFeeling({ videoId: id })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
 
-      if (!feeling) return;
+      if (!feeling) return
 
-      if (feeling.data.data.feeling === "like") this.feeling = "like";
-      else if (feeling.data.data.feeling === "dislike")
-        this.feeling = "dislike";
+      if (feeling.data.data.feeling === 'like') this.feeling = 'like'
+      else if (feeling.data.data.feeling === 'dislike') { this.feeling = 'dislike' }
     },
-    async createFeeling(type) {
+    async createFeeling (type) {
       if (!this.isAuthenticated) {
-        this.signinDialog = true;
+        this.signinDialog = true
         this.details = {
           title:
-            type === "like" ? "Like this video?" : "Don't like this video?",
-          text: "Sign in to make your opinion count.",
-        };
-        return;
+            type === 'like' ? 'Like this video?' : "Don't like this video?",
+          text: 'Sign in to make your opinion count.'
+        }
+        return
       }
       switch (true) {
-        case type === "like" && this.feeling === "":
-          this.feeling = "like";
-          this.video.likes++;
+        case type === 'like' && this.feeling === '':
+          this.feeling = 'like'
+          this.video.likes++
           // console.log('new like')
-          break;
-        case type === "like" && this.feeling === type:
-          this.feeling = "";
-          this.video.likes--;
+          break
+        case type === 'like' && this.feeling === type:
+          this.feeling = ''
+          this.video.likes--
           // console.log('remove like')
-          break;
-        case type === "like" && this.feeling === "dislike":
-          this.feeling = "like";
-          this.video.dislikes--;
-          this.video.likes++;
+          break
+        case type === 'like' && this.feeling === 'dislike':
+          this.feeling = 'like'
+          this.video.dislikes--
+          this.video.likes++
           // console.log('change to like')
-          break;
-        case type === "dislike" && this.feeling === "":
-          this.feeling = "dislike";
-          this.video.dislikes++;
+          break
+        case type === 'dislike' && this.feeling === '':
+          this.feeling = 'dislike'
+          this.video.dislikes++
           // console.log('new dislike')
-          break;
-        case type === "dislike" && this.feeling === type:
-          this.feeling = "";
-          this.video.dislikes--;
+          break
+        case type === 'dislike' && this.feeling === type:
+          this.feeling = ''
+          this.video.dislikes--
           // console.log('remove dislike')
-          break;
-        case type === "dislike" && this.feeling === "like":
-          this.feeling = "dislike";
-          this.video.likes--;
-          this.video.dislikes++;
+          break
+        case type === 'dislike' && this.feeling === 'like':
+          this.feeling = 'dislike'
+          this.video.likes--
+          this.video.dislikes++
         // console.log('change to dislike')
       }
 
       const feeling = await FeelingService.createFeeling({
         videoId: this.video._id,
-        type,
+        type
       }).catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
 
-      if (!feeling) return;
+      if (!feeling) return
     },
-    async subscribe() {
+    async subscribe () {
       if (!this.isAuthenticated) {
-        this.signinDialog = true;
+        this.signinDialog = true
         this.details = {
-          title: "Want to subscribe to this channel?",
-          text: "Sign in to subscribe to this channel.",
-        };
-        return;
+          title: 'Want to subscribe to this channel?',
+          text: 'Sign in to subscribe to this channel.'
+        }
+        return
       }
-      this.subscribeLoading = true;
+      this.subscribeLoading = true
       const sub = await SubscriptionService.createSubscription({
-        channelId: this.video.userId._id,
+        channelId: this.video.userId._id
       })
         .catch((err) => console.log(err))
         .finally(() => {
-          this.subscribeLoading = false;
-        });
+          this.subscribeLoading = false
+        })
 
-      if (!sub) return;
+      if (!sub) return
 
       if (!sub.data.data._id) {
-        this.subscribed = false;
-        this.video.userId.subscribers--;
+        this.subscribed = false
+        this.video.userId.subscribers--
       } else {
-        this.subscribed = true;
-        this.video.userId.subscribers++;
+        this.subscribed = true
+        this.video.userId.subscribers++
       }
     },
-    async updateViews(id) {
+    async updateViews (id) {
       const views = await VideoService.updateViews(id).catch((err) => {
-        console.log(err);
-      });
-      if (!views) return;
+        console.log(err)
+      })
+      if (!views) return
 
-      this.video.views++;
+      this.video.views++
     },
-    play(e) {
-      console.log(e);
+    play (e) {
+      console.log(e)
     },
-    actions() {
-      this.getVideo();
+    actions () {
+      this.getVideo()
     },
-    show(event) {
-      if (event.target.innerText === "SHOW MORE") {
-        this.truncate = false;
-        event.target.innerText = "SHOW LESS";
+    show (event) {
+      if (event.target.innerText === 'SHOW MORE') {
+        this.truncate = false
+        event.target.innerText = 'SHOW LESS'
       } else {
-        this.truncate = true;
-        event.target.innerText = "SHOW MORE";
+        this.truncate = true
+        event.target.innerText = 'SHOW MORE'
       }
     },
-    truncateText(string = "", num) {
+    truncateText (string = '', num) {
       if (string.length <= num) {
-        return string;
+        return string
       }
-      return string.slice(0, num);
+      return string.slice(0, num)
     },
-    dateFormatter(date) {
-      return moment(date).fromNow();
-    },
+    dateFormatter (date) {
+      return moment(date).fromNow()
+    }
   },
   components: {
     AddComment,
     CommentList,
     SigninModal,
-    InfiniteLoading,
+    InfiniteLoading
   },
-  mounted() {
-    this.getVideo(this.$route.params.id);
-    if (this.isAuthenticated) this.updateViews(this.$route.params.id);
+  mounted () {
+    this.getVideo(this.$route.params.id)
+    if (this.isAuthenticated) this.updateViews(this.$route.params.id)
   },
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     this.page = 1;
-    (this.loading = false), (this.loaded = false), (this.videos = []);
-    this.infiniteId += 1;
-    this.getVideo(to.params.id);
-    next();
-  },
-};
+    (this.loading = false), (this.loaded = false), (this.videos = [])
+    this.infiniteId += 1
+    this.getVideo(to.params.id)
+    next()
+  }
+}
 </script>
 
 <style lang="scss">

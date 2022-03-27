@@ -161,8 +161,6 @@ import UserService from '@/services/UserService'
 import VideoService from '@/services/VideoService'
 import { mapGetters } from 'vuex'
 
-
-
 export default {
   data: () => ({
     tab: null,
@@ -186,7 +184,7 @@ export default {
     SigninModal
   },
   methods: {
-    async getChannel(id) {
+    async getChannel (id) {
       // console.log(this.$route.params.id)
       this.loading = true
       this.errored = false
@@ -212,7 +210,7 @@ export default {
       this.checkSubscription(this.channel._id)
       // console.log(channel)
     },
-    async getVideos() {
+    async getVideos () {
       // this.getChannel()
       this.loading = true
 
@@ -229,7 +227,7 @@ export default {
 
       this.videos = videos.data
     },
-    async checkSubscription(id) {
+    async checkSubscription (id) {
       if (!this.currentUser) return
       this.loading = true
       const sub = await SubscriptionService.checkSubscription({ channelId: id })
@@ -245,7 +243,7 @@ export default {
       if (!sub.data.data._id) this.subscribed = false
       else this.subscribed = true
     },
-    async subscribe() {
+    async subscribe () {
       if (!this.isAuthenticated) {
         this.signinDialog = true
         this.details = {
@@ -276,10 +274,10 @@ export default {
       // console.log(this.subscribed)
     }
   },
-  mounted() {
+  mounted () {
     this.getChannel(this.$route.params.id)
   },
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     this.getChannel(to.params.id)
     next()
   }

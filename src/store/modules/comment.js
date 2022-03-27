@@ -14,17 +14,17 @@ export default {
     }
   },
   mutations: {
-    setComments(state, comments) {
+    setComments (state, comments) {
       state.comments = comments
     },
-    addComment(state, comment) {
+    addComment (state, comment) {
       // console.log('hello', comment)
       state.comments.data.unshift(comment)
       // console.log(state.comments.data)
     }
   },
   actions: {
-    setComments({ commit }, videoId) {
+    setComments ({ commit }, videoId) {
       return new Promise((resolve, reject) => {
         CommentService.getCommentByVideoId(videoId)
           .then((comments) => {
@@ -34,7 +34,7 @@ export default {
           .catch((err) => reject(err))
       })
     },
-    addComment({ commit }, comment) {
+    addComment ({ commit }, comment) {
       commit('addComment', comment)
     }
   }

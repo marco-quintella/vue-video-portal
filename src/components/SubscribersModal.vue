@@ -71,7 +71,7 @@ import SubscriptionService from '@/services/SubscriptionService'
 export default {
   name: 'SubscribersModal',
   props: ['openDialog'],
-  data: function() {
+  data: function () {
     return {
       headers: [
         {
@@ -89,12 +89,12 @@ export default {
   },
   computed: {
     ...mapGetters(['getUrl']),
-    dialog() {
+    dialog () {
       return this.openDialog
     }
   },
   methods: {
-    async getSubscribers() {
+    async getSubscribers () {
       this.loading = true
       const subscribers = await SubscriptionService.getSubscribers(0)
         .catch((err) => console.log(err))
@@ -123,14 +123,14 @@ export default {
     //     }
     //   ]
     // },
-    subscribe(item) {
+    subscribe (item) {
       console.log(item)
     },
-    closeModal() {
+    closeModal () {
       this.$emit('closeDialog')
     }
   },
-  mounted() {
+  mounted () {
     // this.initialize()
     this.getSubscribers()
   }

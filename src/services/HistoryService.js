@@ -1,16 +1,16 @@
 import Api from '@/services/Api'
 
 export default {
-  getAll(params) {
+  getAll (params) {
     return Api().get('histories', { params: params })
   },
-  createHistory(data) {
+  createHistory (data) {
     return Api().post('histories', data)
   },
-  deleteById(id) {
+  deleteById (id) {
     return Api().delete(`histories/${id}`)
   },
-  deleteAll(type) {
+  deleteAll (type) {
     return Api().delete(`histories/${type}/all`)
   }
 }

@@ -84,7 +84,7 @@ export default {
     loading: false
   }),
   methods: {
-    async signin() {
+    async signin () {
       if (this.loading) return
       this.loading = true
 

@@ -259,7 +259,7 @@ export default {
     ...mapGetters(['currentUser', 'getUrl'])
   },
   methods: {
-    async getHistories($state) {
+    async getHistories ($state) {
       this.errored = false
       if (!this.loaded) {
         this.loading = true
@@ -295,7 +295,7 @@ export default {
         }
       }
     },
-    async clearHistory() {
+    async clearHistory () {
       this.clearLoading = true
 
       const type = this.historyType === 'Watch History' ? 'watch' : 'search'
@@ -314,7 +314,7 @@ export default {
           this.snackbar = true
         })
     },
-    async deleteHistory(id) {
+    async deleteHistory (id) {
       this.histories = this.histories.filter(
         (history) => history._id.toString() !== id.toString()
       )
@@ -327,20 +327,20 @@ export default {
           this.snackbar = true
         })
     },
-    clickItem(item) {
+    clickItem (item) {
       this.historyType = item
       this.page = 1
       this.histories = []
       this.infiniteId += 1
     },
-    dateFormatter(date) {
+    dateFormatter (date) {
       return moment(date).fromNow()
     }
   },
   components: {
     InfiniteLoading
   },
-  mounted() {
+  mounted () {
     this.getHistories()
   }
 }
