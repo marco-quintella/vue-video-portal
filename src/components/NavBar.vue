@@ -2,13 +2,11 @@
   <nav id="navbar">
     <v-app-bar class="white" flat app clipped-left>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="font-weight-bold"
-        ><router-link to="/" class="black--text" style="text-decoration: none">
-          <v-img
-            :src="require('../assets/logo.png')"
-            width="120"
-          /> </router-link
-      ></v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold">
+        <router-link to="/" class="black--text" style="text-decoration: none">
+          <v-img :src="require('../assets/logo.png')" width="120" />
+        </router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
         flat
@@ -106,21 +104,19 @@
                 <template v-else>
                   <v-avatar color="red">
                     <span class="white--text headline">
-                      {{
-                        currentUser.channelName.split("")[0].toUpperCase()
-                      }}</span
-                    >
+                      {{ currentUser.channelName.split("")[0].toUpperCase() }}
+                    </span>
                   </v-avatar>
                 </template>
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title class="text-capitalize">{{
-                  currentUser.channelName
-                }}</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  currentUser.email
-                }}</v-list-item-subtitle>
+                <v-list-item-title class="text-capitalize">
+                  {{ currentUser.channelName }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ currentUser.email }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -130,8 +126,8 @@
           <v-list v-if="currentUser.role === 'admin'">
             <v-list-item router to="/admin/categories">
               <v-list-item-title>Categories</v-list-item-title>
-            </v-list-item></v-list
-          >
+            </v-list-item>
+          </v-list>
 
           <v-divider v-if="currentUser.role === 'admin'"></v-divider>
 
@@ -462,7 +458,9 @@ export default {
       this.channelLength = 3
     },
     moreChannels () {
-      if (this.channelLength === 3) { this.channelLength = this.items[2].pages.length } else this.channelLength = 3
+      if (this.channelLength === 3) {
+        this.channelLength = this.items[2].pages.length
+      } else this.channelLength = 3
     },
     signOut () {
       this.$store.dispatch('signOut')
@@ -509,7 +507,7 @@ export default {
 
 <style lang="scss">
 $color-pack: false;
-@import '../../node_modules/vuetify/src/styles/main.sass';
+@import "../../node_modules/vuetify/src/styles/main.sass";
 
 .v-list-item__avatar {
   justify-content: center !important;

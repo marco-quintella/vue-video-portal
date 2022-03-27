@@ -2,9 +2,10 @@
   <div id="video-details" class="pa-4">
     <v-container>
       <!-- <div class="d-flex justify-space-between mb-5"> -->
-      <v-btn text small class="pl-0" @click="$router.go(-1)"
-        ><v-icon left>mdi-arrow-left</v-icon> Channel videos</v-btn
-      >
+      <v-btn text small class="pl-0" @click="$router.go(-1)">
+        <v-icon left>mdi-arrow-left</v-icon>
+        Channel videos
+      </v-btn>
       <h2 class="mt-5">Video details</h2>
       <v-row>
         <v-col cols="12">
@@ -27,10 +28,7 @@
                   max-length="100"
                 ></v-text-field>
               </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Description"
-              >
+              <ValidationProvider v-slot="{ errors }" name="Description">
                 <v-textarea
                   :loading="inputLoading"
                   filled
@@ -166,7 +164,8 @@ export default {
 
       this.formData.title = video.title
       this.formData.description = video.description
-      this.formData.visibility = String(video.status) === 'draft' ? '' : video.status
+      this.formData.visibility =
+        String(video.status) === 'draft' ? '' : video.status
       this.formData.category = video.categoryId.title
       this.imgDataUrl = video.thumbnailUrl
     },

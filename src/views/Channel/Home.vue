@@ -23,19 +23,17 @@
                       ></v-img>
 
                       <v-avatar v-else color="red" size="60">
-                        <span class="white--text headline ">
-                          {{
-                            channel.channelName.split('')[0].toUpperCase()
-                          }}</span
-                        >
+                        <span class="white--text headline">
+                          {{ channel.channelName.split("")[0].toUpperCase() }}
+                        </span>
                       </v-avatar>
                     </v-list-item-avatar>
                     <v-list-item-content class="align-self-auto">
-                      <v-list-item-title class="headline mb-1">{{
-                        channel.channelName
-                      }}</v-list-item-title>
-                      <v-list-item-subtitle
-                        >{{ channel.subscribers }} subscribers
+                      <v-list-item-title class="headline mb-1">
+                        {{ channel.channelName }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle>
+                        {{ channel.subscribers }} subscribers
                       </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
@@ -48,14 +46,14 @@
                 :class="[
                   { 'red white--text': !subscribed },
                   { 'grey grey--text lighten-3 text--darken-3': subscribed },
-                  'mt-6'
+                  'mt-6',
                 ]"
                 tile
                 large
                 depressed
                 :loading="subscribeLoading"
                 @click="subscribe"
-                >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
+                >{{ !subscribed ? "subscribe" : "subscribed" }}</v-btn
               >
               <!-- <template v-else-if="!currentUser" -->
               <v-btn
@@ -63,14 +61,14 @@
                 :class="[
                   { 'red white--text': !subscribed },
                   { 'grey grey--text lighten-3 text--darken-3': subscribed },
-                  'mt-6'
+                  'mt-6',
                 ]"
                 tile
                 large
                 depressed
                 :loading="subscribeLoading"
                 @click="subscribe"
-                >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
+                >{{ !subscribed ? "subscribe" : "subscribed" }}</v-btn
               >
               <!-- <v-btn icon class="ml-5 mt-6"><v-icon>mdi-bell</v-icon></v-btn> -->
             </v-col>

@@ -2,7 +2,7 @@
   <div id="dashboard" class="pa-4">
     <v-container fluid>
       <div class="d-flex justify-space-between mb-5">
-        <h2>channel dashboard</h2>
+        <h2>{{ user.channelName }} Dashboard</h2>
         <div class="right">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
@@ -58,7 +58,11 @@ export default {
     UploadVideoModal,
     SubscribersModal
   },
-  mounted () {}
+  computed: {
+    user () {
+      return this.$store.getters.currentUser
+    }
+  }
 }
 </script>
 

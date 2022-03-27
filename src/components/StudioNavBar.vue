@@ -3,12 +3,8 @@
     <v-app-bar class="white" app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="font-weight-bold">
-        <router-link
-          to="/studio"
-          class="black--text"
-          style="text-decoration: none"
-        >
-          Studio
+        <router-link to="/" class="black--text" style="text-decoration: none">
+          <v-img :src="require('../assets/logo.png')" width="120" />
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -107,6 +103,17 @@
           </v-list>
 
           <v-divider></v-divider>
+
+          <v-list v-if="currentUser.role === 'admin'">
+            <v-subheader>Admin Panel</v-subheader>
+            <v-list-item-group>
+              <v-list-item router to="/admin/categories">
+                <v-list-item-title>Categories</v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+
+          <v-divider v-if="currentUser.role === 'admin'"></v-divider>
 
           <v-list>
             <v-list-item

@@ -1,12 +1,12 @@
 <template>
   <div id="video" class="pa-4 pl-0">
     <!-- <v-container fluid> -->
-    <h2>channel videos</h2>
+    <h2>{{ user.channelName }} videos</h2>
 
     <!-- <v-row> -->
     <v-tabs v-model="tab" id="tab" class="mt-5">
       <v-tab> Uploads </v-tab>
-      <v-tab> Live </v-tab>
+      <!-- <v-tab> Live </v-tab> -->
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -31,22 +31,22 @@
               loading-text="Loading... Please wait"
             >
               <template v-slot:[`item.feelings`]="{ item }">
-                <span class="mr-3"
-                  ><v-icon small class="pr-1">mdi-thumb-up</v-icon
-                  >{{ item.likes }}</span
-                >
-                <span
-                  ><v-icon small class="pr-1">mdi-thumb-down</v-icon
-                  >{{ item.dislikes }}</span
-                >
+                <span class="mr-3">
+                  <v-icon small class="pr-1"> mdi-thumb-up </v-icon>
+                  {{ item.likes }}
+                </span>
+                <span>
+                  <v-icon small class="pr-1"> mdi-thumb-down </v-icon>
+                  {{ item.dislikes }}
+                </span>
               </template>
               <template v-slot:top>
                 <v-dialog v-model="dialogDelete" persistent max-width="500px">
                   <v-card>
                     <v-card-title>
-                      <span class="headline"
-                        >Permanently delete this video?</span
-                      >
+                      <span class="headline">
+                        Permanently delete this video?
+                      </span>
                     </v-card-title>
 
                     <v-card-text>
@@ -56,7 +56,7 @@
                             <v-col cols="3" sm="2" md="5" lg="5">
                               <v-img
                                 class="align-center"
-                                :src="`${url}/uploads/thumbnails/${itemToDelete.thumbnailUrl}`"
+                                :src="itemToDelete.thumbnailUrl"
                               >
                               </v-img>
                             </v-col>
@@ -117,7 +117,7 @@
                   router
                   :to="`/watch/${item._id}`"
                 >
-                  <v-icon> mdi-youtube </v-icon>
+                  <v-icon> mdi-play-circle </v-icon>
                 </v-btn>
                 <v-btn icon text @click.stop="deleteBtn(item)">
                   <v-icon> mdi-delete </v-icon>
@@ -168,6 +168,11 @@ export default {
     videos: [],
     itemToDelete: {}
   }),
+  computed: {
+    user () {
+      return this.$store.getters.currentUser
+    }
+  },
   methods: {
     async getVideos () {
       this.loading = true
