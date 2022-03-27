@@ -64,7 +64,7 @@
                 : ''
             "
           >
-            <div class="video-title">{{ video.title }}</div>
+            <div class="video-title text-primary">{{ video.title }}</div>
           </router-link>
         </v-card-title>
         <div>

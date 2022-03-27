@@ -1,54 +1,29 @@
 <template>
-  <div id="trending" class="pt-7 px-sm-10">
+  <div id="trending">
     <v-container fluid>
       <v-row>
         <v-col
-          cols="8"
-          sm="7"
-          md="10"
-          lg="10"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
           v-for="(video, i) in loading ? 12 : videos"
           :key="i"
-          class="mx-lg-0 mx-md-0 mx-sm-auto mx-auto"
+          class="mx-xs-auto"
         >
           <v-skeleton-loader
+            type="card-avatar"
             class="mx-auto"
-            type="list-item-avatar-three-line"
             :loading="loading"
             tile
             large
           >
-            <v-card class="card" tile flat :to="`/watch/${video._id}`">
-              <v-row no-gutters>
-                <v-col class="mx-auto" cols="12" sm="8" md="5" lg="4">
-                  <!-- <v-responsive max-height="100%"> -->
-                  <v-img
-                    max-height="200"
-                    class="align-center"
-                    :src="`${getUrl}/uploads/thumbnails/${video.thumbnailUrl}`"
-                  >
-                  </v-img>
-                  <!-- </v-responsive> -->
-                </v-col>
-                <v-col class="hidden-sm-and-down">
-                  <div class="ml-4 ">
-                    <v-card-title class="pl-2 pt-0 subtitle-1 font-weight-bold">
-                      {{ video.title }}
-                    </v-card-title>
-
-                    <v-card-subtitle class="pl-2 pb-0" v-if="video.userId">
-                      {{ video.userId.channelName }}
-                      <v-icon>mdi-circle-small</v-icon
-                      >{{ video.views }} views<v-icon>mdi-circle-small</v-icon
-                      >{{ dateFormatter(video.createdAt) }}
-                    </v-card-subtitle>
-                    <v-card-subtitle class="pl-2 pt-0">
-                      {{ truncateText(video.description, 200) }}
-                    </v-card-subtitle>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-card>
+            <video-card
+              :video="video"
+              :card="{ maxWidth: 350 }"
+              :channel="video.userId"
+              :key="i"
+            />
           </v-skeleton-loader>
         </v-col>
         <v-col class="text-center" v-if="videos.length === 0 && !loading">
@@ -89,9 +64,9 @@
 
 <script>
 import VideoService from '@/services/VideoService'
-import moment from 'moment'
 import InfiniteLoading from 'vue-infinite-loading'
 import { mapGetters } from 'vuex'
+import VideoCard from '@/components/VideoCard.vue'
 
 export default {
   name: 'TrendingPage',
@@ -133,19 +108,11 @@ export default {
       } else {
         $state.complete()
       }
-    },
-    truncateText (string = '', num) {
-      if (string.length <= num) {
-        return string
-      }
-      return string.slice(0, num)
-    },
-    dateFormatter (date) {
-      return moment(date).fromNow()
     }
   },
   components: {
-    InfiniteLoading
+    InfiniteLoading,
+    VideoCard
   }
 }
 </script>

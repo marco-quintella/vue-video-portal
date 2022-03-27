@@ -1,6 +1,6 @@
 <template>
   <nav id="navbar">
-    <v-app-bar class="white" flat app clipped-left>
+    <v-app-bar class="white" app clipped-left>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="font-weight-bold">
         <router-link to="/" class="black--text" style="text-decoration: none">
@@ -9,6 +9,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
+        class="hidden-xs-only"
         flat
         hide-details
         append-icon="mdi-magnify"
@@ -25,18 +26,22 @@
         <template v-slot:activator="{ on: menu }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
-              <v-btn icon class="mr-7" v-on="{ ...tooltip, ...menu }"
-                ><v-icon size="25">mdi-video-plus</v-icon></v-btn
+              <v-btn
+                class="hidden-xs-only mr-7"
+                icon
+                v-on="{ ...tooltip, ...menu }"
               >
+                <v-icon size="25">mdi-video-plus</v-icon>
+              </v-btn>
             </template>
             <span>Create a video and more</span>
           </v-tooltip>
         </template>
         <v-list>
           <v-list-item router to="/studio">
-            <v-list-item-icon class="mr-3"
-              ><v-icon>mdi-play-box-outline</v-icon></v-list-item-icon
-            >
+            <v-list-item-icon class="mr-3">
+              <v-icon>mdi-play-box-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>Upload video</v-list-item-title>
           </v-list-item>
           <!-- <v-list-item>
@@ -290,7 +295,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'NavBar',
   data: () => ({
-    drawer: true,
+    drawer: false,
     listIndex: null,
     items: [
       {

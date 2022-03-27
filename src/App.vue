@@ -9,10 +9,10 @@
           'SignUp',
           'Dashboard',
           'Video',
-          'Detail'
+          'Detail',
         ].includes(this.$route.name)
           ? true
-          : false
+          : false,
       }"
     >
       <router-view></router-view>
@@ -31,11 +31,28 @@ body {
   font-size: 14px;
 }
 
-a {
-  text-decoration: inherit;
-  color: inherit;
+.v-application a {
+  color: currentColor;
+  text-decoration: none;
 }
-h3, .h3 {
+
+.subhead,
+h1,
+h2,
+h3,
+h4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  max-height: 30px;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 17.5px;
+  text-overflow: ellipsis;
+  font-weight: 400;
+}
+
+h3,
+.h3 {
   display: block;
   font-size: 1.17em;
   margin-block-start: 1em;
@@ -44,13 +61,20 @@ h3, .h3 {
   margin-inline-end: 0px;
   font-weight: bold;
 }
+
 .content-bg {
   background-color: #f9f9f9;
 }
+
 .card {
   background: #f9f9f9 !important;
 }
+
 .text-primary {
   color: #030303 !important;
+}
+
+.small-text {
+  font-size: 12px;
 }
 </style>
