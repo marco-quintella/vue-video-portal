@@ -36,16 +36,21 @@
                       <v-col class="mx-auto" cols="3" sm="3" md="5" lg="5">
                         <v-img
                           class="align-center"
-                          :src="
-                            `${getUrl}/uploads/thumbnails/${history.videoId.thumbnailUrl}`
-                          "
+                          :src="`${getUrl}/uploads/thumbnails/${history.videoId.thumbnailUrl}`"
                         >
                         </v-img>
                       </v-col>
                       <v-col>
                         <div class="ml-2">
                           <v-card-title
-                            class="pl-2 pt-0 subtitle-1 font-weight-bold d-flex justify-space-between"
+                            class="
+                              pl-2
+                              pt-0
+                              subtitle-1
+                              font-weight-bold
+                              d-flex
+                              justify-space-between
+                            "
                             style="line-height: 1"
                           >
                             {{ history.videoId.title }}
@@ -119,7 +124,13 @@
                   <v-card class="card d-flex pl-0" flat>
                     <v-card-text class="pl-0 py-0">
                       <v-card-title
-                        class="pl-0 black--text text--lighten-5 subtitle-1 font-weight-medium"
+                        class="
+                          pl-0
+                          black--text
+                          text--lighten-5
+                          subtitle-1
+                          font-weight-medium
+                        "
                         >{{ history.searchText }}</v-card-title
                       >
                       <v-card-subtitle class="pl-0 pb-0">{{
@@ -182,7 +193,9 @@
           lg="5"
           :class="[
             'pa-0',
-            { 'fill-height': $vuetify.breakpoint.name.smAndDown ? true : false }
+            {
+              'fill-height': $vuetify.breakpoint.name.smAndDown ? true : false,
+            },
           ]"
         >
           <v-card
@@ -192,10 +205,10 @@
           >
             <v-radio-group v-model="historyType">
               <p class="title font-weight-regular pl-5 mb-2">History Type</p>
-              <v-list class=" grey lighten-4">
+              <v-list class="grey lighten-4">
                 <v-list-item-group>
                   <template v-for="(item, i) in items">
-                    <v-divider :key="i"></v-divider>
+                    <v-divider :key="`divider-${i}`"></v-divider>
                     <v-list-item
                       active-class="grey lighten-4"
                       :key="`item-${i}`"
@@ -235,13 +248,13 @@
 </template>
 
 <script>
+import HistoryService from '@/services/HistoryService'
 import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
 import { mapGetters } from 'vuex'
 
-import HistoryService from '@/services/HistoryService'
-import InfiniteLoading from 'vue-infinite-loading'
-
 export default {
+  name: 'HistoryPage',
   data: () => ({
     loading: false,
     loaded: false,

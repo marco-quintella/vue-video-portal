@@ -436,7 +436,7 @@ export default {
     async search () {
       if (!this.searchText) return
       // console.log(this.searchText == this.$route.query['search-query'])
-      if (this.searchText == this.$route.query['search-query']) return
+      if (this.searchText === String(this.$route.query['search-query'])) return
       // this.searchText = this.$route.query['search-query']
       const data = {
         type: 'search',

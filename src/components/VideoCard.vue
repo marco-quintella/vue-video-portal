@@ -118,7 +118,7 @@
 
 <script>
 import moment from 'moment'
-import { default as _urlExist } from 'url-exist'
+import _urlExist from 'url-exist'
 
 export default {
   name: 'VideoCard',
@@ -157,7 +157,7 @@ export default {
   overflow: hidden;
   display: block;
   -webkit-line-clamp: 2;
-  display: box;
+  display: flex;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;

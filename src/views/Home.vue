@@ -79,7 +79,7 @@ import moment from 'moment'
 import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   data: () => ({
     loading: false,
     loaded: false,

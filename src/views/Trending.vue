@@ -88,15 +88,13 @@
 </template>
 
 <script>
-import InfiniteLoading from 'vue-infinite-loading'
+import VideoService from '@/services/VideoService'
 import moment from 'moment'
-
+import InfiniteLoading from 'vue-infinite-loading'
 import { mapGetters } from 'vuex'
 
-import VideoService from '@/services/VideoService'
-
 export default {
-  name: 'Trending',
+  name: 'TrendingPage',
   data: () => ({
     loading: false,
     loaded: false,

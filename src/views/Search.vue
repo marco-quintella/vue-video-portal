@@ -49,7 +49,7 @@
                         :src="`${getUrl}/uploads/avatars/${result.photoUrl}`"
                         :alt="`${result.channelName} avatar`"
                       />
-                      <template v-else color="red">
+                      <template v-else>
                         <span class="white--text display-1">
                           {{ result.channelName.split("")[0].toUpperCase() }}
                         </span>
@@ -166,11 +166,12 @@
 </template>
 
 <script>
+import SearchService from '@/services/SearchService'
 import InfiniteLoading from 'vue-infinite-loading'
 import { mapGetters } from 'vuex'
-import SearchService from '@/services/SearchService'
 
 export default {
+  name: 'SearchPage',
   data: () => ({
     errored: false,
     loading: true,

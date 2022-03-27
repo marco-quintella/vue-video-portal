@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import {
   extend, setInteractionMode, ValidationObserver,
   ValidationProvider
@@ -9,6 +10,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
+
 // import InfiniteLoading from 'vue-infinite-loading'
 
 setInteractionMode('eager')

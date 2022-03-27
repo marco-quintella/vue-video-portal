@@ -5,12 +5,8 @@
 
     <!-- <v-row> -->
     <v-tabs v-model="tab" id="tab" class="mt-5">
-      <v-tab>
-        Uploads
-      </v-tab>
-      <v-tab>
-        Live
-      </v-tab>
+      <v-tab> Uploads </v-tab>
+      <v-tab> Live </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -34,7 +30,7 @@
               :loading="loading"
               loading-text="Loading... Please wait"
             >
-              <template v-slot:item.feelings="{ item }">
+              <template v-slot:[`item.feelings`]="{ item }">
                 <span class="mr-3"
                   ><v-icon small class="pr-1">mdi-thumb-up</v-icon
                   >{{ item.likes }}</span
@@ -77,7 +73,6 @@
                                   class="pl-2 pt-2 pb-0"
                                   style="line-height: 1"
                                 >
-
                                   Published
                                   {{ dateFormatter(itemToDelete.createdAt) }}
                                   <br />
@@ -110,11 +105,9 @@
                   </v-card>
                 </v-dialog>
               </template>
-              <template v-slot:item.actions="{ item }">
+              <template v-slot:[`item.actions`]="{ item }">
                 <v-btn icon href text class="mr-2">
-                  <v-icon @click="editItem(item)">
-                    mdi-pencil
-                  </v-icon>
+                  <v-icon @click="editItem(item)"> mdi-pencil </v-icon>
                 </v-btn>
                 <v-btn
                   icon
@@ -124,23 +117,17 @@
                   router
                   :to="`/watch/${item._id}`"
                 >
-                  <v-icon>
-                    mdi-youtube
-                  </v-icon>
+                  <v-icon> mdi-youtube </v-icon>
                 </v-btn>
                 <v-btn icon text @click.stop="deleteBtn(item)">
-                  <v-icon>
-                    mdi-delete
-                  </v-icon>
+                  <v-icon> mdi-delete </v-icon>
                 </v-btn>
               </template>
             </v-data-table>
           </v-card>
         </template>
       </v-tab-item>
-      <v-tab-item>
-        live
-      </v-tab-item>
+      <v-tab-item> live </v-tab-item>
     </v-tabs-items>
     <!-- </v-row> -->
     <!-- </v-container> -->
@@ -157,6 +144,7 @@
 import VideoService from '@/services/VideoService'
 import moment from 'moment'
 export default {
+  name: 'StudioVideoPage',
   data: () => ({
     loading: false,
     deleteBtnLoading: false,

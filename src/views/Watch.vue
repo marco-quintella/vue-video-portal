@@ -345,6 +345,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'WatchPage',
   data: () => ({
     loading: false,
     loaded: false,
@@ -519,6 +520,7 @@ export default {
         console.log(err)
       })
 
+      // eslint-disable-next-line no-useless-return
       if (!feeling) return
     },
     async subscribe () {
@@ -593,8 +595,10 @@ export default {
     if (this.isAuthenticated) this.updateViews(this.$route.params.id)
   },
   beforeRouteUpdate (to, from, next) {
-    this.page = 1;
-    (this.loading = false), (this.loaded = false), (this.videos = [])
+    this.page = 1
+    this.loading = false
+    this.loaded = false
+    this.videos = []
     this.infiniteId += 1
     this.getVideo(to.params.id)
     next()

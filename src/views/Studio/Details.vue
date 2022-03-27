@@ -118,7 +118,7 @@ import CategoryService from '@/services/CategoryService'
 import VideoService from '@/services/VideoService'
 
 export default {
-  name: 'Details',
+  name: 'StudioDetailsPage',
   data () {
     return {
       // dialog: this.openDialog ? this.openDialog : false,
@@ -162,13 +162,13 @@ export default {
 
       if (!video) return
       video = video.data.data
-      this.url = `${process.env.VUE_APP_URL}/api/v1/videos/${video._id}/thumbnails`
+      this.url = video.url
 
       this.formData.title = video.title
       this.formData.description = video.description
-      this.formData.visibility = video.status == 'draft' ? '' : video.status
+      this.formData.visibility = String(video.status) === 'draft' ? '' : video.status
       this.formData.category = video.categoryId.title
-      this.imgDataUrl = `${process.env.VUE_APP_URL}/uploads/thumbnails/${video.thumbnailUrl}`
+      this.imgDataUrl = video.thumbnailUrl
     },
     async submit () {
       // if (this.$route.name === 'Dashboard')

@@ -278,7 +278,7 @@ export default {
     },
     async addReply (event, id) {
       if (!this.isAuthenticated) return
-      if (this.$refs[`input${id}`][0].$refs.input.value == '') return
+      if (String(this.$refs[`input${id}`][0].$refs.input.value) === '') return
 
       this.btnLoading = true
       // console.log((event.target.loading = true))

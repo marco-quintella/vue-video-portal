@@ -162,6 +162,7 @@ import VideoService from '@/services/VideoService'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'ChannelHomePage',
   data: () => ({
     tab: null,
     loading: false,

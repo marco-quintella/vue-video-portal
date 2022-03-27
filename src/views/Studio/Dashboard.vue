@@ -44,10 +44,11 @@
 </template>
 
 <script>
-import UploadVideoModal from '@/components/UploadVideoModal'
 import SubscribersModal from '@/components/SubscribersModal'
+import UploadVideoModal from '@/components/UploadVideoModal'
 
 export default {
+  name: 'StudioDashboardPage',
   data: () => ({
     loading: true,
     dialog: false,
