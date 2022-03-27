@@ -7,7 +7,7 @@
       >
       <h2 class="mt-5">Video details</h2>
       <v-row>
-        <v-col cols="8">
+        <v-col cols="12">
           <ValidationObserver ref="form" v-slot="{ handleSubmit, reset }">
             <form @submit.prevent="handleSubmit(submit)" @reset.prevent="reset">
               <ValidationProvider
@@ -30,7 +30,6 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Description"
-                rules="required|min:3"
               >
                 <v-textarea
                   :loading="inputLoading"
@@ -88,7 +87,7 @@
             </form>
           </ValidationObserver>
         </v-col>
-        <v-col cols="4" class="text-center">
+        <!-- <v-col cols="4" class="text-center">
           <v-btn text @click="toggleShow">Upload Thumbnails</v-btn>
           <my-upload
             field="thumbnail"
@@ -108,7 +107,7 @@
             </div>
             <v-img v-else height="350" :src="imgDataUrl"></v-img>
           </v-responsive>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
   </div>
@@ -117,7 +116,6 @@
 <script>
 import CategoryService from '@/services/CategoryService'
 import VideoService from '@/services/VideoService'
-import myUpload from 'vue-image-crop-upload'
 
 export default {
   name: 'Details',
@@ -215,9 +213,6 @@ export default {
       console.log(field)
       this.imgDataUrl = imgDataUrl
     }
-  },
-  components: {
-    myUpload
   },
   mounted() {
     this.getVideo()
