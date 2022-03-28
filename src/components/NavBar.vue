@@ -223,7 +223,7 @@
                   />
                 </v-avatar>
                 <template v-else>
-                  <v-avatar color="red">
+                  <v-avatar color="primary">
                     <span class="white--text headline">
                       {{
                         item.channelId.channelName.split("")[0].toUpperCase()
@@ -366,65 +366,65 @@ export default {
           //   icon: 'mdi-badge-account'
           // }
         ]
-      },
-      {
-        header: 'MORE FROM VUETUBE',
-        pages: [
-          {
-            title: 'VueTube Premium',
-            link: '#vp',
-            icon: 'mdi-youtube'
-          },
-          {
-            title: 'Gaming',
-            link: '#g',
-            icon: 'mdi-youtube-gaming'
-          },
-          {
-            title: 'Live',
-            link: '#li',
-            icon: 'mdi-access-point'
-          }
-        ]
-      },
-      {
-        header: null,
-        pages: [
-          {
-            title: 'Setting',
-            link: '#sg',
-            icon: 'mdi-cog'
-          },
-          {
-            title: 'Report history',
-            link: '#rh',
-            icon: 'mdi-flag'
-          },
-          {
-            title: 'Help',
-            link: '#hp',
-            icon: 'mdi-help-circle'
-          },
-          {
-            title: 'Send feedback',
-            link: '#f',
-            icon: 'mdi-message-alert'
-          }
-        ]
       }
+      // {
+      //   header: 'MORE FROM VUETUBE',
+      //   pages: [
+      //     {
+      //       title: 'VueTube Premium',
+      //       link: '#vp',
+      //       icon: 'mdi-youtube'
+      //     },
+      //     {
+      //       title: 'Gaming',
+      //       link: '#g',
+      //       icon: 'mdi-youtube-gaming'
+      //     },
+      //     {
+      //       title: 'Live',
+      //       link: '#li',
+      //       icon: 'mdi-access-point'
+      //     }
+      //   ]
+      // },
+      // {
+      //   header: null,
+      //   pages: [
+      //     {
+      //       title: 'Setting',
+      //       link: '#sg',
+      //       icon: 'mdi-cog'
+      //     },
+      //     {
+      //       title: 'Report history',
+      //       link: '#rh',
+      //       icon: 'mdi-flag'
+      //     },
+      //     {
+      //       title: 'Help',
+      //       link: '#hp',
+      //       icon: 'mdi-help-circle'
+      //     },
+      //     {
+      //       title: 'Send feedback',
+      //       link: '#f',
+      //       icon: 'mdi-message-alert'
+      //     }
+      //   ]
+      // }
     ],
     links: [
-      { text: 'About', link: '#' },
-      { text: 'Press', link: '#' },
-      { text: 'Copyrignt', link: '#' },
-      { text: 'Contact us', link: '#' },
-      { text: 'Creators', link: '#' },
-      { text: 'Advertise', link: '#' },
-      { text: 'Developers', link: '#' },
-      { text: 'Terms', link: '#' },
-      { text: 'Privacy', link: '#' },
-      { text: 'Policy & Safety', link: '#' },
-      { text: 'Test new features', link: '#' }
+      // { text: 'About', link: '#' },
+      // { text: 'Press', link: '#' },
+      // { text: 'Copyrignt', link: '#' },
+      // { text: 'Contact us', link: '#' },
+      // { text: 'Creators', link: '#' },
+      { text: 'Advertise', link: '#' }
+      // { text: 'Developers', link: '#' },
+      // { text: 'Terms', link: '#' },
+      // { text: 'Privacy', link: '#' },
+      // { text: 'Policy & Safety', link: '#' },
+      // { text: 'Test new features', link: '#' }
     ],
     channelLength: 0,
     searchText: ''
