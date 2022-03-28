@@ -182,7 +182,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import myUpload from 'vue-image-crop-upload'
+import myUpload from 'vue-image-crop-upload/upload-2.vue'
 
 export default {
   name: 'SettingsModal',
