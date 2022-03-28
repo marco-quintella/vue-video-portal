@@ -20,6 +20,13 @@
           : `${url}/uploads/thumbnails/loading.webp`
       "
     >
+      <div style="display: block">
+        <div class="time-overlay">
+          <span class="time-overlay-renderer">
+            {{ video.length }}
+          </span>
+        </div>
+      </div>
       <v-row
         v-if="video.status === 'processing' || video.status === 'uploading'"
         class="fill-height ma-0"
@@ -33,6 +40,7 @@
         ></v-progress-circular>
       </v-row>
     </v-img>
+
     <v-row no-gutters>
       <v-col cols="auto" v-if="card.type != 'noAvatar'">
         <div class="pl-0 pt-3 pr-3" router :to="`/channels/${channel._id}`">
@@ -45,9 +53,9 @@
             ></v-img>
           </v-avatar>
           <v-avatar v-else color="red" size="36">
-            <span class="white--text headline">{{
-              channel.channelName.split("")[0].toUpperCase()
-            }}</span>
+            <span class="white--text headline">
+              {{ channel.channelName.split("")[0].toUpperCase() }}
+            </span>
           </v-avatar>
         </div>
       </v-col>
@@ -178,6 +186,43 @@ export default {
   &::after {
     content: "•";
     margin: 0 4px;
+  }
+}
+
+.time-overlay {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 4px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 3px 4px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: 0.35px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+
+  &-renderer {
+    max-height: 12px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 }
 </style>
