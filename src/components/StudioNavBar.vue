@@ -178,7 +178,7 @@
               link
               class="mb-0"
               :to="item.link === '' ? '' : item.link"
-              @click="settingsMoal(item.title)"
+              @click="settingsModal(item.title)"
               exact
               active-class="active-item"
             >
@@ -311,20 +311,20 @@ export default {
         header: 'fixed',
         pages: [
           {
-            title: 'Settings',
+            title: 'Studio Settings',
             link: '',
             icon: 'mdi-cog'
-          },
-          {
-            title: 'Send feedback',
-            link: '#sf',
-            icon: 'mdi-history'
-          },
-          {
-            title: 'Creator Studio Classic',
-            link: '#cs',
-            icon: 'mdi-play-box-outline'
           }
+          // {
+          //   title: 'Send feedback',
+          //   link: '#sf',
+          //   icon: 'mdi-history'
+          // },
+          // {
+          //   title: 'Creator Studio Classic',
+          //   link: '#cs',
+          //   icon: 'mdi-play-box-outline'
+          // }
         ]
       }
     ],
@@ -341,8 +341,8 @@ export default {
     modal () {
       this.dialog = true
     },
-    settingsMoal (title) {
-      if (title !== 'Settings') return
+    settingsModal (title) {
+      if (title !== 'Studio Settings') return
       this.settingsDialog = true
     }
   },
