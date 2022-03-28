@@ -5,6 +5,7 @@ import {
 } from 'vee-validate'
 import { email, max, min, oneOf, required, size } from 'vee-validate/dist/rules'
 import Vue from 'vue'
+import VueMeta from 'vue-meta'
 import Vuebar from 'vuebar'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
@@ -49,7 +50,7 @@ extend('password', {
 
 extend('size', {
   ...size,
-  message: 'video size should be less than 5 GB!'
+  message: 'video size should be less than 500 MB!'
 })
 
 Vue.config.productionTip = false
@@ -65,6 +66,7 @@ Vue.component('ValidationObserver', ValidationObserver)
 
 // Vue.component('InfiniteLoading', InfiniteLoading)
 
+Vue.use(VueMeta)
 Vue.use(Vuebar)
 
 new Vue({

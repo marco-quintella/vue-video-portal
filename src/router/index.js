@@ -1,9 +1,11 @@
 import NavBar from '@/components/NavBar.vue'
 import StudioNavBar from '@/components/StudioNavBar.vue'
 import Vue from 'vue'
+import Meta from 'vue-meta'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
+Vue.use(Meta)
 
 const routes = [
   {

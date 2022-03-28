@@ -22,7 +22,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  metaInfo: {
+    title: 'Home Page',
+    titleTemplate: '%s | PornCenter VideoHub'
+  }
 }
 </script>
 
