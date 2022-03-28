@@ -47,7 +47,7 @@
           </div>
 
           <ValidationProvider
-            rules="required|size:5000000"
+            rules="required|size:500000"
             v-slot="{ errors }"
             name="file"
             ref="provider"
