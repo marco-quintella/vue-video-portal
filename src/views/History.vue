@@ -13,7 +13,7 @@
           lg="7"
           class="pt-8 pl-8"
         >
-          <h1 class="title font-weight-medium pb-5">{{ historyType }}</h1>
+          <h1 class="title font-weight-medium mb-7">{{ historyType }}</h1>
           <template v-if="historyType == 'Watch History'">
             <template v-if="histories.length <= 0 && !loading">
               <p class="text-center body-1">No watch history yet.</p>
@@ -36,7 +36,7 @@
                       <v-col class="mx-auto" cols="3" sm="3" md="5" lg="5">
                         <v-img
                           class="align-center"
-                          :src="`${getUrl}/uploads/thumbnails/${history.videoId.thumbnailUrl}`"
+                          :src="history.videoId.thumbnailUrl"
                         >
                         </v-img>
                       </v-col>
@@ -48,25 +48,55 @@
                               pt-0
                               subtitle-1
                               font-weight-bold
-                              d-flex
+                              row
+                              ma-0
                               justify-space-between
                             "
                             style="line-height: 1"
                           >
-                            {{ history.videoId.title }}
-
-                            <v-btn text @click="deleteHistory(history._id)">
-                              <v-icon>mdi-close</v-icon>
-                            </v-btn>
+                            <div class="col pa-0" style="word-break: keep-all">
+                              <router-link
+                                :to="`/watch/${history.videoId._id}`"
+                                class="text-primary"
+                              >
+                                {{ history.videoId.title }}
+                              </router-link>
+                            </div>
+                            <div class="col-auto pa-0">
+                              <v-btn text @click="deleteHistory(history._id)">
+                                <v-icon>mdi-close</v-icon>
+                              </v-btn>
+                            </div>
                           </v-card-title>
 
                           <v-card-subtitle
                             class="pl-2 pt-2 pb-0"
                             style="line-height: 1"
                           >
-                            {{ history.userId.channelName
-                            }}<v-icon>mdi-circle-small</v-icon
-                            >{{ history.videoId.views }} views
+                            <router-link
+                              :to="`/channels/${history.userId._id}`"
+                              class="text-primary text-subheader"
+                            >
+                              <v-avatar color="primary" size="15">
+                                <v-img
+                                  v-if="currentUser.photoUrl !== 'no-photo.jpg'"
+                                  :src="history.userId.photoUrl"
+                                  :alt="`${history.userId.channelName} avatar`"
+                                />
+                                <template v-else>
+                                  <span class="headline">
+                                    {{
+                                      history.userId.channelName
+                                        .split("")[0]
+                                        .toUpperCase()
+                                    }}
+                                  </span>
+                                </template>
+                              </v-avatar>
+                              {{ history.userId.channelName }}
+                            </router-link>
+                            <v-icon> mdi-circle-small </v-icon>
+                            {{ history.videoId.views }} views
                           </v-card-subtitle>
                           <v-card-subtitle class="pl-2 pt-2 pb-0">
                             {{ history.videoId.description }}
